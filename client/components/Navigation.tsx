@@ -20,10 +20,10 @@ export default function Navigation() {
 
   const navItems = [
     { name: "Home", href: "#home" },
+    { name: "Languages", href: "#languages" },
+    { name: "Search", href: "#search" },
+    { name: "Categories", href: "#categories" },
     { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
   ];
 
   const scrollToSection = (href: string) => {

@@ -35,7 +35,10 @@ export default function Navigation() {
   };
 
   return (
-    <nav
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
@@ -45,27 +48,54 @@ export default function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <div className="flex-shrink-0">
+          <motion.div
+            className="flex-shrink-0"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
               Portfolio
             </span>
-          </div>
+          </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
+          <motion.div
+            className="hidden md:block"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             <div className="flex items-center space-x-8">
-              {navItems.map((item) => (
-                <button
+              {navItems.map((item, index) => (
+                <motion.button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className="text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium"
+                  className="text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium relative"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {item.name}
-                </button>
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.2 }}
+                  />
+                </motion.button>
               ))}
-              <ThemeToggle />
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.8 }}
+              >
+                <ThemeToggle />
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
@@ -81,22 +111,35 @@ export default function Navigation() {
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden bg-background/95 backdrop-blur-md rounded-lg mb-4 border">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-foreground/80 hover:text-foreground hover:bg-accent rounded-md transition-colors duration-200"
-                >
-                  {item.name}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              className="md:hidden bg-background/95 backdrop-blur-md rounded-lg mb-4 border"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                {navItems.map((item, index) => (
+                  <motion.button
+                    key={item.name}
+                    onClick={() => scrollToSection(item.href)}
+                    className="block w-full text-left px-3 py-2 text-base font-medium text-foreground/80 hover:text-foreground hover:bg-accent rounded-md transition-colors duration-200"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    whileHover={{ x: 10 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {item.name}
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

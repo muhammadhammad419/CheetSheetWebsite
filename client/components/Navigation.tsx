@@ -55,7 +55,7 @@ export default function Navigation() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-              Portfolio
+              CodeCheat
             </span>
           </motion.div>
 

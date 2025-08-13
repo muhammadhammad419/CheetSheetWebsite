@@ -479,7 +479,11 @@ export default function Problems() {
                                   <CardTitle className="hover:text-primary transition-colors">
                                     {problem.title}
                                   </CardTitle>
-                                  <CardDescription className="line-clamp-2">
+                                  <CardDescription className="overflow-hidden" style={{
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: 2,
+                                    WebkitBoxOrient: 'vertical',
+                                  }}>
                                     {problem.description}
                                   </CardDescription>
                                   <div className="flex gap-1 flex-wrap">

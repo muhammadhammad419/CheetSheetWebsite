@@ -9,6 +9,8 @@ import { ThemeToggle } from "./ThemeToggle";
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,17 +22,34 @@ export default function Navigation() {
   }, []);
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "Languages", href: "#languages" },
-    { name: "Search", href: "#search" },
-    { name: "Categories", href: "#categories" },
-    { name: "About", href: "#about" },
+    { name: "Home", href: "/", type: "route" },
+    { name: "Examples", href: "/examples", type: "route" },
+    { name: "Problems", href: "/problems", type: "route" },
+    { name: "Languages", href: "#languages", type: "scroll" },
+    { name: "About", href: "#about", type: "scroll" },
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  const handleNavigation = (item: typeof navItems[0]) => {
+    if (item.type === "route") {
+      navigate(item.href);
+      setIsOpen(false);
+    } else {
+      // Only scroll if we're on the home page
+      if (location.pathname === "/") {
+        const element = document.querySelector(item.href);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        // Navigate to home first, then scroll
+        navigate("/");
+        setTimeout(() => {
+          const element = document.querySelector(item.href);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      }
       setIsOpen(false);
     }
   };
@@ -68,26 +87,33 @@ export default function Navigation() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <div className="flex items-center space-x-8">
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className="text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium relative"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {item.name}
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                    initial={{ scaleX: 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ duration: 0.2 }}
-                  />
-                </motion.button>
-              ))}
+              {navItems.map((item, index) => {
+                const isActive = item.type === "route" && location.pathname === item.href;
+                return (
+                  <motion.button
+                    key={item.name}
+                    onClick={() => handleNavigation(item)}
+                    className={cn(
+                      "text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium relative",
+                      isActive && "text-primary"
+                    )}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {item.name}
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: isActive ? 1 : 0 }}
+                      whileHover={{ scaleX: 1 }}
+                      transition={{ duration: 0.2 }}
+                    />
+                  </motion.button>
+                );
+              })}
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -122,20 +148,26 @@ export default function Navigation() {
               transition={{ duration: 0.3 }}
             >
               <div className="px-2 pt-2 pb-3 space-y-1">
-                {navItems.map((item, index) => (
-                  <motion.button
-                    key={item.name}
-                    onClick={() => scrollToSection(item.href)}
-                    className="block w-full text-left px-3 py-2 text-base font-medium text-foreground/80 hover:text-foreground hover:bg-accent rounded-md transition-colors duration-200"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    whileHover={{ x: 10 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {item.name}
-                  </motion.button>
-                ))}
+                {navItems.map((item, index) => {
+                  const isActive = item.type === "route" && location.pathname === item.href;
+                  return (
+                    <motion.button
+                      key={item.name}
+                      onClick={() => handleNavigation(item)}
+                      className={cn(
+                        "block w-full text-left px-3 py-2 text-base font-medium text-foreground/80 hover:text-foreground hover:bg-accent rounded-md transition-colors duration-200",
+                        isActive && "bg-accent text-primary"
+                      )}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      whileHover={{ x: 10 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {item.name}
+                    </motion.button>
+                  );
+                })}
               </div>
             </motion.div>
           )}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Copy, Check } from "lucide-react";
 import { motion } from "framer-motion";
@@ -8,6 +8,30 @@ interface SyntaxHighlighterProps {
   language: string;
   title?: string;
 }
+
+interface TokenProps {
+  type: 'keyword' | 'string' | 'comment' | 'number' | 'text';
+  children: ReactNode;
+}
+
+const Token = ({ type, children }: TokenProps) => {
+  const getClassName = () => {
+    switch (type) {
+      case 'keyword':
+        return 'text-blue-400 font-semibold';
+      case 'string':
+        return 'text-green-400';
+      case 'comment':
+        return 'text-gray-500 italic';
+      case 'number':
+        return 'text-orange-400';
+      default:
+        return 'text-gray-300';
+    }
+  };
+
+  return <span className={getClassName()}>{children}</span>;
+};
 
 export const SyntaxHighlighter = ({ code, language, title }: SyntaxHighlighterProps) => {
   const [copied, setCopied] = useState(false);
@@ -22,41 +46,131 @@ export const SyntaxHighlighter = ({ code, language, title }: SyntaxHighlighterPr
     }
   };
 
-  // Simple syntax highlighting (could be enhanced with a proper library)
-  const highlightSyntax = (code: string, lang: string) => {
-    let highlighted = code;
+  const highlightSyntax = (code: string, lang: string): ReactNode[] => {
+    const lines = code.split('\n');
     
     // Keywords for different languages
     const keywords: Record<string, string[]> = {
-      javascript: ['const', 'let', 'var', 'function', 'if', 'else', 'for', 'while', 'return', 'import', 'export', 'class', 'extends', 'async', 'await', 'try', 'catch'],
-      python: ['def', 'class', 'if', 'else', 'elif', 'for', 'while', 'return', 'import', 'from', 'as', 'try', 'except', 'finally', 'with'],
-      react: ['import', 'export', 'const', 'let', 'function', 'return', 'useState', 'useEffect', 'useContext'],
-      typescript: ['interface', 'type', 'extends', 'implements', 'public', 'private', 'protected', 'readonly'],
-      css: ['display', 'flex', 'grid', 'position', 'color', 'background', 'margin', 'padding', 'border', 'width', 'height']
+      javascript: ['const', 'let', 'var', 'function', 'if', 'else', 'for', 'while', 'return', 'import', 'export', 'class', 'extends', 'async', 'await', 'try', 'catch', 'new', 'this', 'true', 'false', 'null', 'undefined'],
+      python: ['def', 'class', 'if', 'else', 'elif', 'for', 'while', 'return', 'import', 'from', 'as', 'try', 'except', 'finally', 'with', 'True', 'False', 'None', 'and', 'or', 'not', 'in'],
+      react: ['import', 'export', 'const', 'let', 'function', 'return', 'useState', 'useEffect', 'useContext', 'React', 'JSX'],
+      typescript: ['interface', 'type', 'extends', 'implements', 'public', 'private', 'protected', 'readonly', 'enum', 'namespace'],
+      css: ['display', 'flex', 'grid', 'position', 'color', 'background', 'margin', 'padding', 'border', 'width', 'height', 'font-size', 'text-align']
     };
 
     const langKeywords = keywords[lang] || keywords.javascript;
 
-    // Highlight keywords
-    langKeywords.forEach(keyword => {
-      const regex = new RegExp(`\\b${keyword}\\b`, 'g');
-      highlighted = highlighted.replace(regex, `<span class="text-blue-400 font-semibold">${keyword}</span>`);
+    return lines.map((line, lineIndex) => {
+      const tokens: ReactNode[] = [];
+      let currentIndex = 0;
+
+      // Process the line character by character
+      while (currentIndex < line.length) {
+        let matched = false;
+
+        // Check for comments first (highest priority)
+        if (line.slice(currentIndex, currentIndex + 2) === '//' || 
+            (line.slice(currentIndex, currentIndex + 1) === '#' && lang === 'python')) {
+          tokens.push(
+            <Token key={`comment-${lineIndex}-${currentIndex}`} type="comment">
+              {line.slice(currentIndex)}
+            </Token>
+          );
+          break;
+        }
+
+        // Check for multi-line comment start (basic handling)
+        if (line.slice(currentIndex, currentIndex + 2) === '/*') {
+          const commentEnd = line.indexOf('*/', currentIndex + 2);
+          const commentText = commentEnd !== -1 
+            ? line.slice(currentIndex, commentEnd + 2)
+            : line.slice(currentIndex);
+          tokens.push(
+            <Token key={`comment-${lineIndex}-${currentIndex}`} type="comment">
+              {commentText}
+            </Token>
+          );
+          currentIndex += commentText.length;
+          matched = true;
+        }
+
+        // Check for strings
+        if (!matched && (line[currentIndex] === '"' || line[currentIndex] === "'" || line[currentIndex] === '`')) {
+          const quote = line[currentIndex];
+          let stringEnd = currentIndex + 1;
+          
+          // Find the end of the string
+          while (stringEnd < line.length && line[stringEnd] !== quote) {
+            if (line[stringEnd] === '\\') stringEnd++; // Skip escaped characters
+            stringEnd++;
+          }
+          
+          if (stringEnd < line.length) stringEnd++; // Include closing quote
+          
+          const stringText = line.slice(currentIndex, stringEnd);
+          tokens.push(
+            <Token key={`string-${lineIndex}-${currentIndex}`} type="string">
+              {stringText}
+            </Token>
+          );
+          currentIndex = stringEnd;
+          matched = true;
+        }
+
+        // Check for numbers
+        if (!matched && /\d/.test(line[currentIndex])) {
+          let numberEnd = currentIndex;
+          while (numberEnd < line.length && /[\d.]/.test(line[numberEnd])) {
+            numberEnd++;
+          }
+          
+          const numberText = line.slice(currentIndex, numberEnd);
+          tokens.push(
+            <Token key={`number-${lineIndex}-${currentIndex}`} type="number">
+              {numberText}
+            </Token>
+          );
+          currentIndex = numberEnd;
+          matched = true;
+        }
+
+        // Check for keywords
+        if (!matched && /[a-zA-Z_]/.test(line[currentIndex])) {
+          let wordEnd = currentIndex;
+          while (wordEnd < line.length && /[a-zA-Z0-9_]/.test(line[wordEnd])) {
+            wordEnd++;
+          }
+          
+          const word = line.slice(currentIndex, wordEnd);
+          const isKeyword = langKeywords.includes(word);
+          
+          tokens.push(
+            <Token key={`word-${lineIndex}-${currentIndex}`} type={isKeyword ? "keyword" : "text"}>
+              {word}
+            </Token>
+          );
+          currentIndex = wordEnd;
+          matched = true;
+        }
+
+        // If nothing matched, add the current character as text
+        if (!matched) {
+          tokens.push(
+            <Token key={`char-${lineIndex}-${currentIndex}`} type="text">
+              {line[currentIndex]}
+            </Token>
+          );
+          currentIndex++;
+        }
+      }
+
+      return (
+        <div key={`line-${lineIndex}`}>
+          {tokens}
+          {lineIndex < lines.length - 1 && '\n'}
+        </div>
+      );
     });
-
-    // Highlight strings
-    highlighted = highlighted.replace(/"([^"]*)"/g, '<span class="text-green-400">"$1"</span>');
-    highlighted = highlighted.replace(/'([^']*)'/g, '<span class="text-green-400">\'$1\'</span>');
-    highlighted = highlighted.replace(/`([^`]*)`/g, '<span class="text-green-400">`$1`</span>');
-
-    // Highlight comments
-    highlighted = highlighted.replace(/\/\/.*$/gm, '<span class="text-gray-500 italic">$&</span>');
-    highlighted = highlighted.replace(/#.*$/gm, '<span class="text-gray-500 italic">$&</span>');
-    highlighted = highlighted.replace(/\/\*[\s\S]*?\*\//g, '<span class="text-gray-500 italic">$&</span>');
-
-    // Highlight numbers
-    highlighted = highlighted.replace(/\b\d+\.?\d*\b/g, '<span class="text-orange-400">$&</span>');
-
-    return highlighted;
   };
 
   return (
@@ -84,12 +198,9 @@ export const SyntaxHighlighter = ({ code, language, title }: SyntaxHighlighterPr
         </Button>
         
         <pre className="p-4 overflow-x-auto text-sm">
-          <code 
-            className="text-gray-300 font-mono leading-relaxed"
-            dangerouslySetInnerHTML={{ 
-              __html: highlightSyntax(code, language) 
-            }}
-          />
+          <code className="text-gray-300 font-mono leading-relaxed">
+            {highlightSyntax(code, language)}
+          </code>
         </pre>
       </div>
     </motion.div>

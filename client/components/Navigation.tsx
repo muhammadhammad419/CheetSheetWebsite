@@ -62,6 +62,7 @@ export default function Navigation() {
                   {item.name}
                 </button>
               ))}
+              <ThemeToggle />
             </div>
           </div>
 

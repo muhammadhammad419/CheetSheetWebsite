@@ -123,8 +123,16 @@ export const categories: Category[] = [
     name: "Web Development",
     icon: "💻",
     description: "Build websites and web applications",
-    subcategories: ["Frontend", "Backend", "Full Stack", "JavaScript", "React", "Angular", "Vue"],
-    courseCount: 156
+    subcategories: [
+      "Frontend",
+      "Backend",
+      "Full Stack",
+      "JavaScript",
+      "React",
+      "Angular",
+      "Vue",
+    ],
+    courseCount: 156,
   },
   {
     id: "mobile-development",
@@ -132,15 +140,21 @@ export const categories: Category[] = [
     icon: "📱",
     description: "Create mobile apps for iOS and Android",
     subcategories: ["React Native", "Flutter", "iOS", "Android", "Ionic"],
-    courseCount: 89
+    courseCount: 89,
   },
   {
     id: "data-science",
     name: "Data Science",
     icon: "📊",
     description: "Analyze data and build ML models",
-    subcategories: ["Python", "Machine Learning", "Data Analysis", "Statistics", "AI"],
-    courseCount: 124
+    subcategories: [
+      "Python",
+      "Machine Learning",
+      "Data Analysis",
+      "Statistics",
+      "AI",
+    ],
+    courseCount: 124,
   },
   {
     id: "design",
@@ -148,15 +162,21 @@ export const categories: Category[] = [
     icon: "🎨",
     description: "UI/UX design and graphic design",
     subcategories: ["UI/UX", "Graphic Design", "Figma", "Adobe", "Prototyping"],
-    courseCount: 78
+    courseCount: 78,
   },
   {
     id: "business",
     name: "Business",
     icon: "💼",
     description: "Business and entrepreneurship skills",
-    subcategories: ["Marketing", "Management", "Entrepreneurship", "Finance", "Sales"],
-    courseCount: 203
+    subcategories: [
+      "Marketing",
+      "Management",
+      "Entrepreneurship",
+      "Finance",
+      "Sales",
+    ],
+    courseCount: 203,
   },
   {
     id: "programming",
@@ -164,8 +184,8 @@ export const categories: Category[] = [
     icon: "⚡",
     description: "Learn programming languages and concepts",
     subcategories: ["JavaScript", "Python", "Java", "C++", "Go", "Rust"],
-    courseCount: 142
-  }
+    courseCount: 142,
+  },
 ];
 
 export const instructors: User[] = [
@@ -180,7 +200,7 @@ export const instructors: User[] = [
     joinedDate: "2020-01-15",
     totalStudents: 45000,
     totalCourses: 12,
-    rating: 4.8
+    rating: 4.8,
   },
   {
     id: "instructor-2",
@@ -193,7 +213,7 @@ export const instructors: User[] = [
     joinedDate: "2019-08-22",
     totalStudents: 32000,
     totalCourses: 8,
-    rating: 4.9
+    rating: 4.9,
   },
   {
     id: "instructor-3",
@@ -206,16 +226,18 @@ export const instructors: User[] = [
     joinedDate: "2021-03-10",
     totalStudents: 28000,
     totalCourses: 6,
-    rating: 4.7
-  }
+    rating: 4.7,
+  },
 ];
 
 export const sampleCourses: Course[] = [
   {
     id: "course-1",
     title: "Complete React Developer Course 2024",
-    description: "Learn React from scratch and build amazing web applications. This comprehensive course covers React fundamentals, hooks, context, routing, and state management with Redux. You'll build real-world projects and deploy them to production.",
-    shortDescription: "Master React.js and build modern web applications from scratch",
+    description:
+      "Learn React from scratch and build amazing web applications. This comprehensive course covers React fundamentals, hooks, context, routing, and state management with Redux. You'll build real-world projects and deploy them to production.",
+    shortDescription:
+      "Master React.js and build modern web applications from scratch",
     thumbnail: "/courses/react-course.jpg",
     instructor: instructors[0],
     price: 89.99,
@@ -235,18 +257,23 @@ export const sampleCourses: Course[] = [
     requirements: [
       "Basic knowledge of HTML, CSS, and JavaScript",
       "Understanding of ES6+ features",
-      "Node.js installed on your computer"
+      "Node.js installed on your computer",
     ],
     learningObjectives: [
       "Build modern React applications from scratch",
       "Master React hooks and component lifecycle",
       "Implement state management with Redux",
       "Create responsive and interactive UIs",
-      "Deploy React apps to production"
+      "Deploy React apps to production",
     ],
     certificate: true,
     createdDate: "2023-06-01",
-    features: ["Lifetime access", "Mobile accessible", "Certificate of completion", "30-day money-back guarantee"],
+    features: [
+      "Lifetime access",
+      "Mobile accessible",
+      "Certificate of completion",
+      "30-day money-back guarantee",
+    ],
     chapters: [
       {
         id: "chapter-1",
@@ -261,7 +288,7 @@ export const sampleCourses: Course[] = [
             type: "Video",
             duration: 15,
             videoUrl: "/videos/react-intro.mp4",
-            isFree: true
+            isFree: true,
           },
           {
             id: "lesson-1-2",
@@ -270,7 +297,7 @@ export const sampleCourses: Course[] = [
             type: "Video",
             duration: 20,
             videoUrl: "/videos/react-setup.mp4",
-            isFree: true
+            isFree: true,
           },
           {
             id: "lesson-1-3",
@@ -278,9 +305,9 @@ export const sampleCourses: Course[] = [
             description: "Creating and rendering your first component",
             type: "Video",
             duration: 25,
-            videoUrl: "/videos/first-component.mp4"
-          }
-        ]
+            videoUrl: "/videos/first-component.mp4",
+          },
+        ],
       },
       {
         id: "chapter-2",
@@ -294,7 +321,7 @@ export const sampleCourses: Course[] = [
             description: "Understanding different component types",
             type: "Video",
             duration: 30,
-            videoUrl: "/videos/component-types.mp4"
+            videoUrl: "/videos/component-types.mp4",
           },
           {
             id: "lesson-2-2",
@@ -302,17 +329,19 @@ export const sampleCourses: Course[] = [
             description: "Passing data between components",
             type: "Video",
             duration: 35,
-            videoUrl: "/videos/props-data-flow.mp4"
-          }
-        ]
-      }
-    ]
+            videoUrl: "/videos/props-data-flow.mp4",
+          },
+        ],
+      },
+    ],
   },
   {
     id: "course-2",
     title: "Python for Data Science Masterclass",
-    description: "Comprehensive course covering Python programming for data science, including pandas, numpy, matplotlib, and machine learning with scikit-learn. Build real data science projects.",
-    shortDescription: "Learn Python programming and data science from beginner to advanced",
+    description:
+      "Comprehensive course covering Python programming for data science, including pandas, numpy, matplotlib, and machine learning with scikit-learn. Build real data science projects.",
+    shortDescription:
+      "Learn Python programming and data science from beginner to advanced",
     thumbnail: "/courses/python-data-science.jpg",
     instructor: instructors[1],
     price: 79.99,
@@ -332,18 +361,23 @@ export const sampleCourses: Course[] = [
     requirements: [
       "No prior programming experience needed",
       "Computer with Python 3.7+ installed",
-      "Basic mathematics knowledge"
+      "Basic mathematics knowledge",
     ],
     learningObjectives: [
       "Master Python programming fundamentals",
       "Perform data analysis with pandas and numpy",
       "Create data visualizations with matplotlib",
       "Build machine learning models",
-      "Work with real-world datasets"
+      "Work with real-world datasets",
     ],
     certificate: true,
     createdDate: "2023-05-15",
-    features: ["Lifetime access", "Downloadable resources", "Coding exercises", "Real projects"],
+    features: [
+      "Lifetime access",
+      "Downloadable resources",
+      "Coding exercises",
+      "Real projects",
+    ],
     chapters: [
       {
         id: "chapter-1",
@@ -358,16 +392,17 @@ export const sampleCourses: Course[] = [
             type: "Video",
             duration: 12,
             videoUrl: "/videos/python-intro.mp4",
-            isFree: true
-          }
-        ]
-      }
-    ]
+            isFree: true,
+          },
+        ],
+      },
+    ],
   },
   {
     id: "course-3",
     title: "UI/UX Design Complete Course",
-    description: "Learn user interface and user experience design from scratch. Master design principles, wireframing, prototyping, and user research. Use Figma to create beautiful designs.",
+    description:
+      "Learn user interface and user experience design from scratch. Master design principles, wireframing, prototyping, and user research. Use Figma to create beautiful designs.",
     shortDescription: "Complete guide to UI/UX design with hands-on projects",
     thumbnail: "/courses/ui-ux-design.jpg",
     instructor: instructors[2],
@@ -388,18 +423,23 @@ export const sampleCourses: Course[] = [
     requirements: [
       "No design experience required",
       "Computer with internet access",
-      "Figma account (free)"
+      "Figma account (free)",
     ],
     learningObjectives: [
       "Understand UI/UX design principles",
       "Create wireframes and prototypes",
       "Conduct user research and testing",
       "Master Figma for design",
-      "Build a design portfolio"
+      "Build a design portfolio",
     ],
     certificate: true,
     createdDate: "2023-07-20",
-    features: ["Design resources", "Template files", "Portfolio guidance", "Industry insights"],
+    features: [
+      "Design resources",
+      "Template files",
+      "Portfolio guidance",
+      "Industry insights",
+    ],
     chapters: [
       {
         id: "chapter-1",
@@ -414,36 +454,40 @@ export const sampleCourses: Course[] = [
             type: "Video",
             duration: 18,
             videoUrl: "/videos/ui-ux-intro.mp4",
-            isFree: true
-          }
-        ]
-      }
-    ]
-  }
+            isFree: true,
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 // Utility functions
 export const getCourseById = (id: string): Course | undefined => {
-  return sampleCourses.find(course => course.id === id);
+  return sampleCourses.find((course) => course.id === id);
 };
 
 export const getCoursesByCategory = (categoryId: string): Course[] => {
-  return sampleCourses.filter(course => 
-    course.category.toLowerCase().replace(/\s+/g, '-') === categoryId
+  return sampleCourses.filter(
+    (course) =>
+      course.category.toLowerCase().replace(/\s+/g, "-") === categoryId,
   );
 };
 
 export const getCoursesByInstructor = (instructorId: string): Course[] => {
-  return sampleCourses.filter(course => course.instructor.id === instructorId);
+  return sampleCourses.filter(
+    (course) => course.instructor.id === instructorId,
+  );
 };
 
 export const searchCourses = (query: string): Course[] => {
   const lowercaseQuery = query.toLowerCase();
-  return sampleCourses.filter(course =>
-    course.title.toLowerCase().includes(lowercaseQuery) ||
-    course.description.toLowerCase().includes(lowercaseQuery) ||
-    course.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery)) ||
-    course.instructor.name.toLowerCase().includes(lowercaseQuery)
+  return sampleCourses.filter(
+    (course) =>
+      course.title.toLowerCase().includes(lowercaseQuery) ||
+      course.description.toLowerCase().includes(lowercaseQuery) ||
+      course.tags.some((tag) => tag.toLowerCase().includes(lowercaseQuery)) ||
+      course.instructor.name.toLowerCase().includes(lowercaseQuery),
   );
 };
 
@@ -454,15 +498,13 @@ export const getPopularCourses = (): Course[] => {
 };
 
 export const getTopRatedCourses = (): Course[] => {
-  return sampleCourses
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 6);
+  return sampleCourses.sort((a, b) => b.rating - a.rating).slice(0, 6);
 };
 
 export const formatDuration = (minutes: number): string => {
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
-  
+
   if (hours === 0) {
     return `${mins}m`;
   } else if (mins === 0) {
@@ -476,6 +518,9 @@ export const formatPrice = (price: number): string => {
   return `$${price.toFixed(2)}`;
 };
 
-export const calculateDiscountPercentage = (originalPrice: number, currentPrice: number): number => {
+export const calculateDiscountPercentage = (
+  originalPrice: number,
+  currentPrice: number,
+): number => {
   return Math.round(((originalPrice - currentPrice) / originalPrice) * 100);
 };

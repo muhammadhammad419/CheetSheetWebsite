@@ -2,7 +2,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -13,11 +19,7 @@ import {
   StaggeredItem,
   HoverScale,
 } from "@/components/Animated";
-import { 
-  sampleCourses, 
-  formatDuration,
-  type Course 
-} from "@/data/lms";
+import { sampleCourses, formatDuration, type Course } from "@/data/lms";
 import {
   Play,
   BookOpen,
@@ -34,14 +36,14 @@ export default function MyLearning() {
   const [activeTab, setActiveTab] = useState("enrolled");
 
   // Mock enrolled courses with progress
-  const enrolledCourses = sampleCourses.slice(0, 2).map(course => ({
+  const enrolledCourses = sampleCourses.slice(0, 2).map((course) => ({
     ...course,
     progress: Math.floor(Math.random() * 100),
     lastAccessed: "2024-01-15",
     timeSpent: Math.floor(Math.random() * 20) + 5,
   }));
 
-  const completedCourses = sampleCourses.slice(2, 3).map(course => ({
+  const completedCourses = sampleCourses.slice(2, 3).map((course) => ({
     ...course,
     progress: 100,
     completedDate: "2024-01-10",
@@ -67,7 +69,9 @@ export default function MyLearning() {
           <AnimatedSection>
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold mb-4">My Learning</h1>
+                <h1 className="text-3xl md:text-4xl font-bold mb-4">
+                  My Learning
+                </h1>
                 <p className="text-xl text-muted-foreground">
                   Track your progress and continue learning
                 </p>
@@ -88,16 +92,24 @@ export default function MyLearning() {
               <Card>
                 <CardContent className="p-6 text-center">
                   <BookOpen className="h-8 w-8 text-primary mx-auto mb-3" />
-                  <div className="text-2xl font-bold">{enrolledCourses.length}</div>
-                  <div className="text-sm text-muted-foreground">Courses Enrolled</div>
+                  <div className="text-2xl font-bold">
+                    {enrolledCourses.length}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Courses Enrolled
+                  </div>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardContent className="p-6 text-center">
                   <Award className="h-8 w-8 text-primary mx-auto mb-3" />
-                  <div className="text-2xl font-bold">{completedCourses.length}</div>
-                  <div className="text-sm text-muted-foreground">Courses Completed</div>
+                  <div className="text-2xl font-bold">
+                    {completedCourses.length}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Courses Completed
+                  </div>
                 </CardContent>
               </Card>
 
@@ -105,7 +117,9 @@ export default function MyLearning() {
                 <CardContent className="p-6 text-center">
                   <Clock className="h-8 w-8 text-primary mx-auto mb-3" />
                   <div className="text-2xl font-bold">24h</div>
-                  <div className="text-sm text-muted-foreground">Total Learning Time</div>
+                  <div className="text-sm text-muted-foreground">
+                    Total Learning Time
+                  </div>
                 </CardContent>
               </Card>
 
@@ -113,7 +127,9 @@ export default function MyLearning() {
                 <CardContent className="p-6 text-center">
                   <TrendingUp className="h-8 w-8 text-primary mx-auto mb-3" />
                   <div className="text-2xl font-bold">5</div>
-                  <div className="text-sm text-muted-foreground">Learning Streak (days)</div>
+                  <div className="text-sm text-muted-foreground">
+                    Learning Streak (days)
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -121,10 +137,18 @@ export default function MyLearning() {
 
           {/* Courses Tabs */}
           <AnimatedSection delay={0.2}>
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <Tabs
+              value={activeTab}
+              onValueChange={setActiveTab}
+              className="w-full"
+            >
               <TabsList className="grid w-full grid-cols-3 max-w-md">
-                <TabsTrigger value="enrolled">Enrolled ({enrolledCourses.length})</TabsTrigger>
-                <TabsTrigger value="completed">Completed ({completedCourses.length})</TabsTrigger>
+                <TabsTrigger value="enrolled">
+                  Enrolled ({enrolledCourses.length})
+                </TabsTrigger>
+                <TabsTrigger value="completed">
+                  Completed ({completedCourses.length})
+                </TabsTrigger>
                 <TabsTrigger value="wishlist">Wishlist (0)</TabsTrigger>
               </TabsList>
 
@@ -132,7 +156,9 @@ export default function MyLearning() {
                 {enrolledCourses.length === 0 ? (
                   <div className="text-center py-12">
                     <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold mb-2">No enrolled courses yet</h3>
+                    <h3 className="text-xl font-semibold mb-2">
+                      No enrolled courses yet
+                    </h3>
                     <p className="text-muted-foreground mb-4">
                       Start your learning journey by enrolling in a course
                     </p>
@@ -153,7 +179,9 @@ export default function MyLearning() {
                               </Badge>
                             </div>
                             <CardHeader className="pb-3">
-                              <CardTitle className="line-clamp-2">{course.title}</CardTitle>
+                              <CardTitle className="line-clamp-2">
+                                {course.title}
+                              </CardTitle>
                               <CardDescription className="line-clamp-2">
                                 By {course.instructor.name}
                               </CardDescription>
@@ -164,7 +192,10 @@ export default function MyLearning() {
                                   <span>Progress</span>
                                   <span>{course.progress}%</span>
                                 </div>
-                                <Progress value={course.progress} className="w-full" />
+                                <Progress
+                                  value={course.progress}
+                                  className="w-full"
+                                />
                               </div>
 
                               <div className="flex items-center justify-between text-sm text-muted-foreground">
@@ -174,12 +205,17 @@ export default function MyLearning() {
                                 </div>
                                 <div className="flex items-center gap-1">
                                   <Calendar className="h-4 w-4" />
-                                  <span>Last: {new Date(course.lastAccessed).toLocaleDateString()}</span>
+                                  <span>
+                                    Last:{" "}
+                                    {new Date(
+                                      course.lastAccessed,
+                                    ).toLocaleDateString()}
+                                  </span>
                                 </div>
                               </div>
 
                               <div className="flex gap-2">
-                                <Button 
+                                <Button
                                   onClick={() => handleResumeLesson(course.id)}
                                   className="flex-1"
                                   size="sm"
@@ -187,8 +223,8 @@ export default function MyLearning() {
                                   <Play className="mr-2 h-4 w-4" />
                                   Continue
                                 </Button>
-                                <Button 
-                                  variant="outline" 
+                                <Button
+                                  variant="outline"
                                   onClick={() => handleCourseClick(course.id)}
                                   size="sm"
                                 >
@@ -208,7 +244,9 @@ export default function MyLearning() {
                 {completedCourses.length === 0 ? (
                   <div className="text-center py-12">
                     <Award className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold mb-2">No completed courses yet</h3>
+                    <h3 className="text-xl font-semibold mb-2">
+                      No completed courses yet
+                    </h3>
                     <p className="text-muted-foreground mb-4">
                       Complete your enrolled courses to see them here
                     </p>
@@ -226,7 +264,9 @@ export default function MyLearning() {
                               </Badge>
                             </div>
                             <CardHeader className="pb-3">
-                              <CardTitle className="line-clamp-2">{course.title}</CardTitle>
+                              <CardTitle className="line-clamp-2">
+                                {course.title}
+                              </CardTitle>
                               <CardDescription className="line-clamp-2">
                                 By {course.instructor.name}
                               </CardDescription>
@@ -246,12 +286,17 @@ export default function MyLearning() {
                               <div className="text-sm text-muted-foreground">
                                 <div className="flex items-center gap-1">
                                   <Calendar className="h-4 w-4" />
-                                  <span>Completed: {new Date(course.completedDate).toLocaleDateString()}</span>
+                                  <span>
+                                    Completed:{" "}
+                                    {new Date(
+                                      course.completedDate,
+                                    ).toLocaleDateString()}
+                                  </span>
                                 </div>
                               </div>
 
                               <div className="flex gap-2">
-                                <Button 
+                                <Button
                                   variant="outline"
                                   onClick={() => handleCourseClick(course.id)}
                                   className="flex-1"
@@ -260,10 +305,7 @@ export default function MyLearning() {
                                   <Play className="mr-2 h-4 w-4" />
                                   Review
                                 </Button>
-                                <Button 
-                                  size="sm"
-                                  className="flex-1"
-                                >
+                                <Button size="sm" className="flex-1">
                                   <Download className="mr-2 h-4 w-4" />
                                   Certificate
                                 </Button>
@@ -280,7 +322,9 @@ export default function MyLearning() {
               <TabsContent value="wishlist" className="space-y-6 mt-8">
                 <div className="text-center py-12">
                   <div className="text-6xl mb-4">💝</div>
-                  <h3 className="text-xl font-semibold mb-2">Your wishlist is empty</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Your wishlist is empty
+                  </h3>
                   <p className="text-muted-foreground mb-4">
                     Save courses you're interested in to your wishlist
                   </p>

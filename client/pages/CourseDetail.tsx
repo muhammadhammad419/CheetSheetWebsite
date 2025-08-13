@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -14,13 +20,13 @@ import {
   StaggeredItem,
   HoverScale,
 } from "@/components/Animated";
-import { 
-  getCourseById, 
-  formatDuration, 
-  formatPrice, 
+import {
+  getCourseById,
+  formatDuration,
+  formatPrice,
   calculateDiscountPercentage,
   type Course,
-  type Chapter 
+  type Chapter,
 } from "@/data/lms";
 import {
   Star,
@@ -45,7 +51,9 @@ export default function CourseDetail() {
   const { courseId } = useParams<{ courseId: string }>();
   const navigate = useNavigate();
   const [course, setCourse] = useState<Course | null>(null);
-  const [expandedChapters, setExpandedChapters] = useState<Set<string>>(new Set());
+  const [expandedChapters, setExpandedChapters] = useState<Set<string>>(
+    new Set(),
+  );
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
 
@@ -99,7 +107,9 @@ export default function CourseDetail() {
   const handleStartLearning = () => {
     // Navigate to first lesson
     if (course.chapters.length > 0 && course.chapters[0].lessons.length > 0) {
-      navigate(`/course/${course.id}/lesson/${course.chapters[0].lessons[0].id}`);
+      navigate(
+        `/course/${course.id}/lesson/${course.chapters[0].lessons[0].id}`,
+      );
     }
   };
 
@@ -111,8 +121,8 @@ export default function CourseDetail() {
       <section className="pt-20 pb-8 bg-gradient-to-br from-background to-accent/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               onClick={() => navigate("/courses")}
               className="mb-6"
             >
@@ -126,15 +136,20 @@ export default function CourseDetail() {
                 <div>
                   <div className="flex items-center gap-2 mb-4">
                     <Badge variant="outline">{course.category}</Badge>
-                    <Badge className={
-                      course.level === "Beginner" ? "bg-green-500" :
-                      course.level === "Intermediate" ? "bg-yellow-500" : "bg-red-500"
-                    }>
+                    <Badge
+                      className={
+                        course.level === "Beginner"
+                          ? "bg-green-500"
+                          : course.level === "Intermediate"
+                            ? "bg-yellow-500"
+                            : "bg-red-500"
+                      }
+                    >
                       {course.level}
                     </Badge>
                   </div>
-                  
-                  <motion.h1 
+
+                  <motion.h1
                     className="text-3xl md:text-4xl font-bold mb-4"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -142,8 +157,8 @@ export default function CourseDetail() {
                   >
                     {course.title}
                   </motion.h1>
-                  
-                  <motion.p 
+
+                  <motion.p
                     className="text-xl text-muted-foreground mb-6"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -156,15 +171,21 @@ export default function CourseDetail() {
                     <div className="flex items-center gap-1">
                       <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                       <span className="font-medium">{course.rating}</span>
-                      <span className="text-muted-foreground">({course.reviewsCount} reviews)</span>
+                      <span className="text-muted-foreground">
+                        ({course.reviewsCount} reviews)
+                      </span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Users className="h-4 w-4" />
-                      <span>{course.studentsEnrolled.toLocaleString()} students</span>
+                      <span>
+                        {course.studentsEnrolled.toLocaleString()} students
+                      </span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Clock className="h-4 w-4" />
-                      <span>{formatDuration(course.totalDuration)} total length</span>
+                      <span>
+                        {formatDuration(course.totalDuration)} total length
+                      </span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Globe className="h-4 w-4" />
@@ -178,14 +199,22 @@ export default function CourseDetail() {
                   <Avatar className="h-12 w-12">
                     <AvatarImage src={course.instructor.avatar} />
                     <AvatarFallback>
-                      {course.instructor.name.split(' ').map(n => n[0]).join('')}
+                      {course.instructor.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
                     </AvatarFallback>
                   </Avatar>
                   <div>
                     <h3 className="font-semibold">{course.instructor.name}</h3>
-                    <p className="text-sm text-muted-foreground">{course.instructor.bio}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {course.instructor.bio}
+                    </p>
                     <div className="flex items-center gap-4 text-xs text-muted-foreground mt-1">
-                      <span>{course.instructor.totalStudents?.toLocaleString()} students</span>
+                      <span>
+                        {course.instructor.totalStudents?.toLocaleString()}{" "}
+                        students
+                      </span>
                       <span>{course.instructor.totalCourses} courses</span>
                       <div className="flex items-center gap-1">
                         <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
@@ -203,9 +232,9 @@ export default function CourseDetail() {
                     {/* Course Preview */}
                     <div className="aspect-video bg-gradient-to-br from-primary/10 to-primary/20 flex items-center justify-center relative">
                       <Play className="h-16 w-16 text-primary" />
-                      <Button 
-                        variant="secondary" 
-                        size="sm" 
+                      <Button
+                        variant="secondary"
+                        size="sm"
                         className="absolute top-4 right-4"
                       >
                         Preview
@@ -216,19 +245,27 @@ export default function CourseDetail() {
                       <div className="flex items-center justify-between">
                         <div>
                           <div className="flex items-center gap-2 mb-2">
-                            <span className="text-2xl font-bold">{formatPrice(course.price)}</span>
+                            <span className="text-2xl font-bold">
+                              {formatPrice(course.price)}
+                            </span>
                             {course.originalPrice && (
                               <>
                                 <span className="text-lg text-muted-foreground line-through">
                                   {formatPrice(course.originalPrice)}
                                 </span>
                                 <Badge className="bg-red-500">
-                                  {calculateDiscountPercentage(course.originalPrice, course.price)}% OFF
+                                  {calculateDiscountPercentage(
+                                    course.originalPrice,
+                                    course.price,
+                                  )}
+                                  % OFF
                                 </Badge>
                               </>
                             )}
                           </div>
-                          <p className="text-sm text-muted-foreground">30-day money-back guarantee</p>
+                          <p className="text-sm text-muted-foreground">
+                            30-day money-back guarantee
+                          </p>
                         </div>
                       </div>
                     </CardHeader>
@@ -238,13 +275,17 @@ export default function CourseDetail() {
                         <div className="space-y-4">
                           <div className="flex items-center gap-2 text-green-600">
                             <Check className="h-4 w-4" />
-                            <span className="font-medium">You're enrolled!</span>
+                            <span className="font-medium">
+                              You're enrolled!
+                            </span>
                           </div>
                           <Progress value={0} className="w-full" />
-                          <p className="text-sm text-muted-foreground">0% complete</p>
-                          <Button 
-                            onClick={handleStartLearning} 
-                            className="w-full" 
+                          <p className="text-sm text-muted-foreground">
+                            0% complete
+                          </p>
+                          <Button
+                            onClick={handleStartLearning}
+                            className="w-full"
                             size="lg"
                           >
                             <Play className="mr-2 h-4 w-4" />
@@ -253,9 +294,9 @@ export default function CourseDetail() {
                         </div>
                       ) : (
                         <div className="space-y-3">
-                          <Button 
-                            onClick={handleEnroll} 
-                            className="w-full" 
+                          <Button
+                            onClick={handleEnroll}
+                            className="w-full"
                             size="lg"
                           >
                             <ShoppingCart className="mr-2 h-4 w-4" />
@@ -277,7 +318,9 @@ export default function CourseDetail() {
 
                       {/* Course includes */}
                       <div className="border-t pt-4">
-                        <h4 className="font-medium mb-3">This course includes:</h4>
+                        <h4 className="font-medium mb-3">
+                          This course includes:
+                        </h4>
                         <ul className="space-y-2 text-sm">
                           {course.features.map((feature, index) => (
                             <li key={index} className="flex items-center gap-2">
@@ -291,7 +334,10 @@ export default function CourseDetail() {
                           </li>
                           <li className="flex items-center gap-2">
                             <Clock className="h-4 w-4 text-green-600" />
-                            <span>{formatDuration(course.totalDuration)} on-demand video</span>
+                            <span>
+                              {formatDuration(course.totalDuration)} on-demand
+                              video
+                            </span>
                           </li>
                           {course.certificate && (
                             <li className="flex items-center gap-2">
@@ -330,13 +376,17 @@ export default function CourseDetail() {
                     </CardHeader>
                     <CardContent>
                       <div className="prose max-w-none">
-                        <p className={showFullDescription ? "" : "line-clamp-4"}>
+                        <p
+                          className={showFullDescription ? "" : "line-clamp-4"}
+                        >
                           {course.description}
                         </p>
-                        <Button 
-                          variant="link" 
+                        <Button
+                          variant="link"
                           className="p-0 h-auto"
-                          onClick={() => setShowFullDescription(!showFullDescription)}
+                          onClick={() =>
+                            setShowFullDescription(!showFullDescription)
+                          }
                         >
                           {showFullDescription ? "Show less" : "Show more"}
                         </Button>
@@ -381,14 +431,16 @@ export default function CourseDetail() {
                   <div className="flex items-center justify-between mb-6">
                     <h3 className="text-xl font-semibold">Course Content</h3>
                     <div className="text-sm text-muted-foreground">
-                      {course.chapters.length} sections • {course.totalLessons} lectures • {formatDuration(course.totalDuration)} total length
+                      {course.chapters.length} sections • {course.totalLessons}{" "}
+                      lectures • {formatDuration(course.totalDuration)} total
+                      length
                     </div>
                   </div>
 
                   <div className="space-y-4">
                     {course.chapters.map((chapter, index) => (
                       <Card key={chapter.id}>
-                        <CardHeader 
+                        <CardHeader
                           className="cursor-pointer hover:bg-accent/50 transition-colors"
                           onClick={() => toggleChapter(chapter.id)}
                         >
@@ -398,8 +450,12 @@ export default function CourseDetail() {
                                 Section {index + 1}: {chapter.title}
                               </CardTitle>
                               <CardDescription>
-                                {chapter.lessons.length} lectures • {formatDuration(
-                                  chapter.lessons.reduce((acc, lesson) => acc + lesson.duration, 0)
+                                {chapter.lessons.length} lectures •{" "}
+                                {formatDuration(
+                                  chapter.lessons.reduce(
+                                    (acc, lesson) => acc + lesson.duration,
+                                    0,
+                                  ),
                                 )}
                               </CardDescription>
                             </div>
@@ -415,8 +471,8 @@ export default function CourseDetail() {
                           <CardContent className="pt-0">
                             <div className="space-y-2">
                               {chapter.lessons.map((lesson) => (
-                                <div 
-                                  key={lesson.id} 
+                                <div
+                                  key={lesson.id}
                                   className="flex items-center justify-between p-3 hover:bg-accent/20 rounded-lg transition-colors"
                                 >
                                   <div className="flex items-center gap-3">
@@ -426,17 +482,30 @@ export default function CourseDetail() {
                                       <Lock className="h-4 w-4 text-muted-foreground" />
                                     )}
                                     <div>
-                                      <h4 className="font-medium text-sm">{lesson.title}</h4>
-                                      <p className="text-xs text-muted-foreground">{lesson.description}</p>
+                                      <h4 className="font-medium text-sm">
+                                        {lesson.title}
+                                      </h4>
+                                      <p className="text-xs text-muted-foreground">
+                                        {lesson.description}
+                                      </p>
                                     </div>
                                   </div>
                                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                    <Badge variant="outline" className="text-xs">
+                                    <Badge
+                                      variant="outline"
+                                      className="text-xs"
+                                    >
                                       {lesson.type}
                                     </Badge>
-                                    <span>{formatDuration(lesson.duration)}</span>
+                                    <span>
+                                      {formatDuration(lesson.duration)}
+                                    </span>
                                     {lesson.isFree && (
-                                      <Button variant="link" size="sm" className="text-xs h-auto p-0">
+                                      <Button
+                                        variant="link"
+                                        size="sm"
+                                        className="text-xs h-auto p-0"
+                                      >
                                         Preview
                                       </Button>
                                     )}
@@ -458,27 +527,41 @@ export default function CourseDetail() {
                         <Avatar className="h-16 w-16">
                           <AvatarImage src={course.instructor.avatar} />
                           <AvatarFallback>
-                            {course.instructor.name.split(' ').map(n => n[0]).join('')}
+                            {course.instructor.name
+                              .split(" ")
+                              .map((n) => n[0])
+                              .join("")}
                           </AvatarFallback>
                         </Avatar>
                         <div>
-                          <CardTitle className="text-xl">{course.instructor.name}</CardTitle>
+                          <CardTitle className="text-xl">
+                            {course.instructor.name}
+                          </CardTitle>
                           <CardDescription className="text-base">
-                            {course.instructor.specialization?.join(', ')}
+                            {course.instructor.specialization?.join(", ")}
                           </CardDescription>
                           <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
                             <div className="flex items-center gap-1">
                               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                              <span>{course.instructor.rating} instructor rating</span>
+                              <span>
+                                {course.instructor.rating} instructor rating
+                              </span>
                             </div>
-                            <span>{course.instructor.totalStudents?.toLocaleString()} students</span>
-                            <span>{course.instructor.totalCourses} courses</span>
+                            <span>
+                              {course.instructor.totalStudents?.toLocaleString()}{" "}
+                              students
+                            </span>
+                            <span>
+                              {course.instructor.totalCourses} courses
+                            </span>
                           </div>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-muted-foreground">{course.instructor.bio}</p>
+                      <p className="text-muted-foreground">
+                        {course.instructor.bio}
+                      </p>
                     </CardContent>
                   </Card>
                 </TabsContent>
@@ -488,13 +571,15 @@ export default function CourseDetail() {
                     <CardHeader>
                       <CardTitle>Student Feedback</CardTitle>
                       <div className="flex items-center gap-4">
-                        <div className="text-4xl font-bold">{course.rating}</div>
+                        <div className="text-4xl font-bold">
+                          {course.rating}
+                        </div>
                         <div>
                           <div className="flex items-center gap-1 mb-1">
                             {[1, 2, 3, 4, 5].map((star) => (
-                              <Star 
-                                key={star} 
-                                className={`h-4 w-4 ${star <= Math.floor(course.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
+                              <Star
+                                key={star}
+                                className={`h-4 w-4 ${star <= Math.floor(course.rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
                               />
                             ))}
                           </div>
@@ -520,13 +605,20 @@ export default function CourseDetail() {
                                 <h4 className="font-medium">Student {i}</h4>
                                 <div className="flex items-center gap-1">
                                   {[1, 2, 3, 4, 5].map((star) => (
-                                    <Star key={star} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                                    <Star
+                                      key={star}
+                                      className="h-3 w-3 fill-yellow-400 text-yellow-400"
+                                    />
                                   ))}
                                 </div>
-                                <span className="text-xs text-muted-foreground">2 days ago</span>
+                                <span className="text-xs text-muted-foreground">
+                                  2 days ago
+                                </span>
                               </div>
                               <p className="text-sm text-muted-foreground">
-                                Great course! The instructor explains concepts clearly and the hands-on projects really help solidify the learning.
+                                Great course! The instructor explains concepts
+                                clearly and the hands-on projects really help
+                                solidify the learning.
                               </p>
                             </div>
                           </div>
@@ -542,21 +634,30 @@ export default function CourseDetail() {
               {/* Related Courses */}
               <Card>
                 <CardHeader>
-                  <CardTitle>More courses by {course.instructor.name}</CardTitle>
+                  <CardTitle>
+                    More courses by {course.instructor.name}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {[1, 2].map((i) => (
-                    <div key={i} className="flex gap-3 p-3 hover:bg-accent/20 rounded-lg transition-colors cursor-pointer">
+                    <div
+                      key={i}
+                      className="flex gap-3 p-3 hover:bg-accent/20 rounded-lg transition-colors cursor-pointer"
+                    >
                       <div className="w-16 h-12 bg-gradient-to-br from-primary/10 to-primary/20 rounded flex items-center justify-center">
                         <Play className="h-4 w-4 text-primary" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-medium text-sm line-clamp-2">Advanced React Patterns Course {i}</h4>
+                        <h4 className="font-medium text-sm line-clamp-2">
+                          Advanced React Patterns Course {i}
+                        </h4>
                         <div className="flex items-center gap-1 mt-1">
                           <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                           <span className="text-xs">4.8</span>
                         </div>
-                        <div className="text-sm font-medium text-primary">$79.99</div>
+                        <div className="text-sm font-medium text-primary">
+                          $79.99
+                        </div>
                       </div>
                     </div>
                   ))}

@@ -2,10 +2,22 @@ import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import Navigation from "@/components/Navigation";
 import {
   AnimatedSection,
@@ -14,16 +26,16 @@ import {
   HoverScale,
   ParticleBackground,
 } from "@/components/Animated";
-import { 
-  categories, 
-  sampleCourses, 
-  getPopularCourses, 
-  getTopRatedCourses, 
+import {
+  categories,
+  sampleCourses,
+  getPopularCourses,
+  getTopRatedCourses,
   searchCourses,
   formatDuration,
   formatPrice,
   calculateDiscountPercentage,
-  type Course 
+  type Course,
 } from "@/data/lms";
 import {
   Search,
@@ -48,13 +60,15 @@ export default function Index() {
     let courses = sampleCourses;
 
     if (selectedCategory !== "all") {
-      courses = courses.filter(course => 
-        course.category.toLowerCase().replace(/\s+/g, '-') === selectedCategory
+      courses = courses.filter(
+        (course) =>
+          course.category.toLowerCase().replace(/\s+/g, "-") ===
+          selectedCategory,
       );
     }
 
     if (selectedLevel !== "all") {
-      courses = courses.filter(course => course.level === selectedLevel);
+      courses = courses.filter((course) => course.level === selectedLevel);
     }
 
     if (searchQuery) {
@@ -73,7 +87,7 @@ export default function Index() {
 
   const CourseCard = ({ course }: { course: Course }) => (
     <HoverScale>
-      <Card 
+      <Card
         className="cursor-pointer transition-all duration-300 hover:shadow-xl overflow-hidden"
         onClick={() => handleCourseClick(course.id)}
       >
@@ -81,13 +95,16 @@ export default function Index() {
           <Play className="h-12 w-12 text-primary" />
           {course.originalPrice && (
             <Badge className="absolute top-2 right-2 bg-red-500">
-              {calculateDiscountPercentage(course.originalPrice, course.price)}% OFF
+              {calculateDiscountPercentage(course.originalPrice, course.price)}%
+              OFF
             </Badge>
           )}
         </div>
         <CardHeader className="pb-3">
           <CardTitle className="line-clamp-2 text-lg">{course.title}</CardTitle>
-          <CardDescription className="line-clamp-2">{course.shortDescription}</CardDescription>
+          <CardDescription className="line-clamp-2">
+            {course.shortDescription}
+          </CardDescription>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span>{course.instructor.name}</span>
           </div>
@@ -97,11 +114,13 @@ export default function Index() {
             <div className="flex items-center gap-1">
               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
               <span className="font-medium">{course.rating}</span>
-              <span className="text-sm text-muted-foreground">({course.reviewsCount})</span>
+              <span className="text-sm text-muted-foreground">
+                ({course.reviewsCount})
+              </span>
             </div>
             <Badge variant="outline">{course.level}</Badge>
           </div>
-          
+
           <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
             <div className="flex items-center gap-1">
               <Clock className="h-4 w-4" />
@@ -115,7 +134,9 @@ export default function Index() {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-lg font-bold">{formatPrice(course.price)}</span>
+              <span className="text-lg font-bold">
+                {formatPrice(course.price)}
+              </span>
               {course.originalPrice && (
                 <span className="text-sm text-muted-foreground line-through">
                   {formatPrice(course.originalPrice)}
@@ -140,7 +161,7 @@ export default function Index() {
           <AnimatedSection>
             <div className="text-center space-y-8">
               <div className="space-y-4">
-                <motion.h1 
+                <motion.h1
                   className="text-4xl md:text-6xl font-bold leading-tight"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -151,17 +172,18 @@ export default function Index() {
                     Limits
                   </span>
                 </motion.h1>
-                <motion.p 
+                <motion.p
                   className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  Join millions of learners from around the world mastering new skills through our expert-led courses
+                  Join millions of learners from around the world mastering new
+                  skills through our expert-led courses
                 </motion.p>
               </div>
 
-              <motion.div 
+              <motion.div
                 className="max-w-2xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -179,7 +201,7 @@ export default function Index() {
                 </div>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="flex flex-wrap gap-4 justify-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -208,7 +230,9 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Explore Categories</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Explore Categories
+              </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 Choose from our wide range of courses across different fields
               </p>
@@ -219,7 +243,7 @@ export default function Index() {
             {categories.map((category) => (
               <StaggeredItem key={category.id}>
                 <HoverScale>
-                  <Card 
+                  <Card
                     className="cursor-pointer transition-all duration-300 hover:shadow-xl group text-center"
                     onClick={() => setSelectedCategory(category.id)}
                   >
@@ -252,14 +276,16 @@ export default function Index() {
           <AnimatedSection>
             <div className="flex items-center justify-between mb-12">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Popular Courses</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Popular Courses
+                </h2>
                 <p className="text-xl text-muted-foreground">
                   Most enrolled courses by our students
                 </p>
               </div>
-              <Button 
-                variant="outline" 
-                onClick={() => navigate('/courses')}
+              <Button
+                variant="outline"
+                onClick={() => navigate("/courses")}
                 className="hidden md:flex"
               >
                 View All Courses
@@ -285,13 +311,16 @@ export default function Index() {
             <AnimatedSection>
               <div className="mb-8">
                 <div className="flex flex-col md:flex-row gap-4 mb-6">
-                  <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <Select
+                    value={selectedCategory}
+                    onValueChange={setSelectedCategory}
+                  >
                     <SelectTrigger className="w-full md:w-auto">
                       <SelectValue placeholder="All Categories" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">All Categories</SelectItem>
-                      {categories.map(category => (
+                      {categories.map((category) => (
                         <SelectItem key={category.id} value={category.id}>
                           {category.icon} {category.name}
                         </SelectItem>
@@ -299,7 +328,10 @@ export default function Index() {
                     </SelectContent>
                   </Select>
 
-                  <Select value={selectedLevel} onValueChange={setSelectedLevel}>
+                  <Select
+                    value={selectedLevel}
+                    onValueChange={setSelectedLevel}
+                  >
                     <SelectTrigger className="w-full md:w-auto">
                       <SelectValue placeholder="All Levels" />
                     </SelectTrigger>
@@ -325,15 +357,19 @@ export default function Index() {
               <AnimatedSection>
                 <div className="text-center py-12">
                   <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">No courses found</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    No courses found
+                  </h3>
                   <p className="text-muted-foreground mb-4">
                     Try adjusting your search criteria or browse our categories
                   </p>
-                  <Button onClick={() => {
-                    setSearchQuery("");
-                    setSelectedCategory("all");
-                    setSelectedLevel("all");
-                  }}>
+                  <Button
+                    onClick={() => {
+                      setSearchQuery("");
+                      setSelectedCategory("all");
+                      setSelectedLevel("all");
+                    }}
+                  >
                     Clear Filters
                   </Button>
                 </div>
@@ -357,7 +393,9 @@ export default function Index() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <AnimatedSection>
               <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Top Rated Courses</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Top Rated Courses
+                </h2>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                   Highest rated courses by our student community
                 </p>
@@ -380,9 +418,12 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose LearnHub?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Why Choose LearnHub?
+              </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Join thousands of learners who trust us for their skill development
+                Join thousands of learners who trust us for their skill
+                development
               </p>
             </div>
           </AnimatedSection>
@@ -393,7 +434,9 @@ export default function Index() {
                 <Card className="text-center">
                   <CardHeader>
                     <div className="text-4xl mb-4">📚</div>
-                    <CardTitle className="text-3xl font-bold text-primary">500+</CardTitle>
+                    <CardTitle className="text-3xl font-bold text-primary">
+                      500+
+                    </CardTitle>
                     <CardDescription>Expert-led Courses</CardDescription>
                   </CardHeader>
                 </Card>
@@ -405,7 +448,9 @@ export default function Index() {
                 <Card className="text-center">
                   <CardHeader>
                     <div className="text-4xl mb-4">🎓</div>
-                    <CardTitle className="text-3xl font-bold text-primary">57k+</CardTitle>
+                    <CardTitle className="text-3xl font-bold text-primary">
+                      57k+
+                    </CardTitle>
                     <CardDescription>Active Students</CardDescription>
                   </CardHeader>
                 </Card>
@@ -417,7 +462,9 @@ export default function Index() {
                 <Card className="text-center">
                   <CardHeader>
                     <div className="text-4xl mb-4">⭐</div>
-                    <CardTitle className="text-3xl font-bold text-primary">4.8</CardTitle>
+                    <CardTitle className="text-3xl font-bold text-primary">
+                      4.8
+                    </CardTitle>
                     <CardDescription>Average Rating</CardDescription>
                   </CardHeader>
                 </Card>
@@ -429,7 +476,9 @@ export default function Index() {
                 <Card className="text-center">
                   <CardHeader>
                     <div className="text-4xl mb-4">🏆</div>
-                    <CardTitle className="text-3xl font-bold text-primary">95%</CardTitle>
+                    <CardTitle className="text-3xl font-bold text-primary">
+                      95%
+                    </CardTitle>
                     <CardDescription>Completion Rate</CardDescription>
                   </CardHeader>
                 </Card>
@@ -442,7 +491,7 @@ export default function Index() {
       {/* Footer */}
       <footer className="py-12 border-t relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             className="text-center text-muted-foreground"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -451,7 +500,9 @@ export default function Index() {
             <div className="grid md:grid-cols-4 gap-8 mb-8">
               <div>
                 <h3 className="font-semibold text-foreground mb-4">LearnHub</h3>
-                <p className="text-sm">Empowering learners worldwide with quality education.</p>
+                <p className="text-sm">
+                  Empowering learners worldwide with quality education.
+                </p>
               </div>
               <div>
                 <h4 className="font-medium text-foreground mb-4">Categories</h4>

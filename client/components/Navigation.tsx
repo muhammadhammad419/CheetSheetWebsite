@@ -23,10 +23,10 @@ export default function Navigation() {
 
   const navItems = [
     { name: "Home", href: "/", type: "route" },
-    { name: "Examples", href: "/examples", type: "route" },
-    { name: "Problems", href: "/problems", type: "route" },
-    { name: "Languages", href: "#languages", type: "scroll" },
-    { name: "About", href: "#about", type: "scroll" },
+    { name: "Courses", href: "/courses", type: "route" },
+    { name: "My Learning", href: "/my-learning", type: "route" },
+    { name: "Teach", href: "/instructor", type: "route" },
+    { name: "Categories", href: "#categories", type: "scroll" },
   ];
 
   const handleNavigation = (item: (typeof navItems)[0]) => {

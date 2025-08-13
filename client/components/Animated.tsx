@@ -1,31 +1,36 @@
-import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { motion } from "framer-motion";
+import { ReactNode } from "react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface AnimatedSectionProps {
   children: ReactNode;
   className?: string;
   delay?: number;
-  direction?: 'up' | 'down' | 'left' | 'right';
+  direction?: "up" | "down" | "left" | "right";
   duration?: number;
 }
 
-export const AnimatedSection = ({ 
-  children, 
-  className, 
-  delay = 0, 
-  direction = 'up',
-  duration = 0.6 
+export const AnimatedSection = ({
+  children,
+  className,
+  delay = 0,
+  direction = "up",
+  duration = 0.6,
 }: AnimatedSectionProps) => {
   const [ref, isVisible] = useScrollAnimation(0.1);
 
   const getInitialPosition = () => {
     switch (direction) {
-      case 'up': return { y: 50, opacity: 0 };
-      case 'down': return { y: -50, opacity: 0 };
-      case 'left': return { x: -50, opacity: 0 };
-      case 'right': return { x: 50, opacity: 0 };
-      default: return { y: 50, opacity: 0 };
+      case "up":
+        return { y: 50, opacity: 0 };
+      case "down":
+        return { y: -50, opacity: 0 };
+      case "left":
+        return { x: -50, opacity: 0 };
+      case "right":
+        return { x: 50, opacity: 0 };
+      default:
+        return { y: 50, opacity: 0 };
     }
   };
 
@@ -42,7 +47,13 @@ export const AnimatedSection = ({
   );
 };
 
-export const StaggeredContainer = ({ children, className }: { children: ReactNode; className?: string }) => {
+export const StaggeredContainer = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
   const [ref, isVisible] = useScrollAnimation(0.1);
 
   return (
@@ -53,9 +64,9 @@ export const StaggeredContainer = ({ children, className }: { children: ReactNod
       variants={{
         visible: {
           transition: {
-            staggerChildren: 0.1
-          }
-        }
+            staggerChildren: 0.1,
+          },
+        },
       }}
       className={className}
     >
@@ -64,12 +75,18 @@ export const StaggeredContainer = ({ children, className }: { children: ReactNod
   );
 };
 
-export const StaggeredItem = ({ children, className }: { children: ReactNode; className?: string }) => {
+export const StaggeredItem = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
   return (
     <motion.div
       variants={{
         hidden: { y: 20, opacity: 0 },
-        visible: { y: 0, opacity: 1, transition: { duration: 0.5 } }
+        visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
       }}
       className={className}
     >
@@ -78,17 +95,23 @@ export const StaggeredItem = ({ children, className }: { children: ReactNode; cl
   );
 };
 
-export const FloatingIcon = ({ children, className }: { children: ReactNode; className?: string }) => {
+export const FloatingIcon = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
   return (
     <motion.div
       animate={{
         y: [0, -10, 0],
-        rotate: [0, 5, -5, 0]
+        rotate: [0, 5, -5, 0],
       }}
       transition={{
         duration: 4,
         repeat: Infinity,
-        ease: "easeInOut"
+        ease: "easeInOut",
       }}
       className={className}
     >
@@ -97,16 +120,20 @@ export const FloatingIcon = ({ children, className }: { children: ReactNode; cla
   );
 };
 
-export const HoverScale = ({ children, className, scale = 1.05 }: { 
-  children: ReactNode; 
-  className?: string; 
-  scale?: number 
+export const HoverScale = ({
+  children,
+  className,
+  scale = 1.05,
+}: {
+  children: ReactNode;
+  className?: string;
+  scale?: number;
 }) => {
   return (
     <motion.div
-      whileHover={{ 
-        scale, 
-        transition: { duration: 0.2 } 
+      whileHover={{
+        scale,
+        transition: { duration: 0.2 },
       }}
       whileTap={{ scale: 0.95 }}
       className={className}
@@ -126,17 +153,29 @@ export const ParticleBackground = () => {
           key={particle}
           className="absolute w-1 h-1 bg-primary/20 rounded-full"
           initial={{
-            x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 1920,
-            y: typeof window !== 'undefined' ? Math.random() * window.innerHeight : Math.random() * 1080,
+            x:
+              typeof window !== "undefined"
+                ? Math.random() * window.innerWidth
+                : Math.random() * 1920,
+            y:
+              typeof window !== "undefined"
+                ? Math.random() * window.innerHeight
+                : Math.random() * 1080,
           }}
           animate={{
-            x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 1920,
-            y: typeof window !== 'undefined' ? Math.random() * window.innerHeight : Math.random() * 1080,
+            x:
+              typeof window !== "undefined"
+                ? Math.random() * window.innerWidth
+                : Math.random() * 1920,
+            y:
+              typeof window !== "undefined"
+                ? Math.random() * window.innerHeight
+                : Math.random() * 1080,
           }}
           transition={{
             duration: Math.random() * 20 + 10,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
           }}
         />
       ))}
@@ -149,7 +188,7 @@ export const GlowingButton = ({ children, className, ...props }: any) => {
     <motion.button
       whileHover={{
         boxShadow: "0 0 25px rgba(124, 58, 237, 0.5)",
-        scale: 1.05
+        scale: 1.05,
       }}
       whileTap={{ scale: 0.95 }}
       className={className}

@@ -23,7 +23,8 @@ export const programmingLanguages: ProgrammingLanguage[] = [
     id: "javascript",
     name: "JavaScript",
     icon: "🟨",
-    description: "High-level, interpreted programming language for web development",
+    description:
+      "High-level, interpreted programming language for web development",
     color: "bg-yellow-500",
     categories: [
       {
@@ -44,7 +45,7 @@ let boolean = true;
 let array = [1, 2, 3];
 let object = { key: "value" };
 let nullValue = null;
-let undefined = undefined;`
+let undefined = undefined;`,
           },
           {
             title: "Template Literals",
@@ -60,9 +61,9 @@ const multiline = \`
   This is a
   multi-line string
   with \${name}
-\`;`
-          }
-        ]
+\`;`,
+          },
+        ],
       },
       {
         name: "Functions",
@@ -86,7 +87,7 @@ const greet3 = (name) => \`Hello, \${name}!\`;
 // Arrow function with block
 const greet4 = (name) => {
   return \`Hello, \${name}!\`;
-};`
+};`,
           },
           {
             title: "Async/Await",
@@ -107,9 +108,9 @@ async function fetchDataAsync() {
   } catch (error) {
     console.error('Error:', error);
   }
-}`
-          }
-        ]
+}`,
+          },
+        ],
       },
       {
         name: "Arrays & Objects",
@@ -132,7 +133,7 @@ const sum = numbers.reduce((acc, n) => acc + n, 0);
 const found = numbers.find(n => n > 3);
 
 // Destructuring
-const [first, second, ...rest] = numbers;`
+const [first, second, ...rest] = numbers;`,
           },
           {
             title: "Object Manipulation",
@@ -152,11 +153,11 @@ const updatedPerson = { ...person, age: 31 };
 // Object methods
 const keys = Object.keys(person);
 const values = Object.values(person);
-const entries = Object.entries(person);`
-          }
-        ]
-      }
-    ]
+const entries = Object.entries(person);`,
+          },
+        ],
+      },
+    ],
   },
   {
     id: "python",
@@ -188,7 +189,7 @@ boolean = True
 list_data = [1, 2, 3, 4]
 tuple_data = (1, 2, 3)
 dict_data = {"key": "value"}
-set_data = {1, 2, 3}`
+set_data = {1, 2, 3}`,
           },
           {
             title: "String Formatting",
@@ -209,9 +210,9 @@ message = "Hello, %s! You are %d years old." % (name, age)
 multi = """
 This is a
 multi-line string
-"""`
-          }
-        ]
+"""`,
+          },
+        ],
       },
       {
         name: "Functions & Classes",
@@ -235,7 +236,7 @@ def flexible_function(*args, **kwargs):
 # Lambda function
 square = lambda x: x ** 2
 numbers = [1, 2, 3, 4, 5]
-squared = list(map(square, numbers))`
+squared = list(map(square, numbers))`,
           },
           {
             title: "Classes",
@@ -263,9 +264,9 @@ class Student(Person):
 
 # Usage
 person = Person("Alice", 25)
-student = Student("Bob", 20, "12345")`
-          }
-        ]
+student = Student("Bob", 20, "12345")`,
+          },
+        ],
       },
       {
         name: "Data Structures",
@@ -289,7 +290,7 @@ person = {"name": "John", "age": 30, "city": "NYC"}
 person["email"] = "john@example.com"
 
 # Dict comprehension
-squared_dict = {x: x**2 for x in range(5)}`
+squared_dict = {x: x**2 for x in range(5)}`,
           },
           {
             title: "Loops & Conditionals",
@@ -317,11 +318,11 @@ else:
     print("Child")
 
 # Ternary operator
-status = "Adult" if age >= 18 else "Minor"`
-          }
-        ]
-      }
-    ]
+status = "Adult" if age >= 18 else "Minor"`,
+          },
+        ],
+      },
+    ],
   },
   {
     id: "react",
@@ -360,7 +361,7 @@ const Button = ({ onClick, children }) => (
   </button>
 );
 
-export default Welcome;`
+export default Welcome;`,
           },
           {
             title: "Props & PropTypes",
@@ -389,9 +390,9 @@ UserCard.propTypes = {
   }).isRequired,
   onEdit: PropTypes.func,
   isEditable: PropTypes.bool,
-};`
-          }
-        ]
+};`,
+          },
+        ],
       },
       {
         name: "Hooks",
@@ -429,7 +430,7 @@ function Counter() {
       </button>
     </div>
   );
-}`
+}`,
           },
           {
             title: "Custom Hooks",
@@ -476,11 +477,11 @@ function UserList() {
       ))}
     </ul>
   );
-}`
-          }
-        ]
-      }
-    ]
+}`,
+          },
+        ],
+      },
+    ],
   },
   {
     id: "typescript",
@@ -517,7 +518,7 @@ type User = {
 type Config = {
   readonly apiUrl: string;
   timeout?: number;
-};`
+};`,
           },
           {
             title: "Interfaces",
@@ -552,9 +553,9 @@ const userResponse: ApiResponse<User> = {
   data: { id: 1, name: "John", email: "john@example.com" },
   status: 200,
   message: "Success"
-};`
-          }
-        ]
+};`,
+          },
+        ],
       },
       {
         name: "Advanced Types",
@@ -591,7 +592,7 @@ class DataStorage<T> {
   get(index: number): T | undefined {
     return this.data[index];
   }
-}`
+}`,
           },
           {
             title: "Utility Types",
@@ -621,11 +622,11 @@ type UserRoles = Record<string, 'admin' | 'user' | 'guest'>;
 // Mapped types
 type ReadonlyUser = {
   readonly [K in keyof User]: User[K];
-};`
-          }
-        ]
-      }
-    ]
+};`,
+          },
+        ],
+      },
+    ],
   },
   {
     id: "css",
@@ -679,7 +680,7 @@ h1 {
 /* Attribute selector */
 input[type="email"] {
   border: 1px solid #ccc;
-}`
+}`,
           },
           {
             title: "CSS Grid",
@@ -713,9 +714,9 @@ input[type="email"] {
   .grid-container {
     grid-template-columns: 1fr;
   }
-}`
-          }
-        ]
+}`,
+          },
+        ],
       },
       {
         name: "Flexbox & Layout",
@@ -761,7 +762,7 @@ input[type="email"] {
   .flex-container {
     flex-direction: column;
   }
-}`
+}`,
           },
           {
             title: "CSS Animations",
@@ -804,11 +805,11 @@ input[type="email"] {
 .card {
   background: var(--primary-color);
   border-radius: var(--border-radius);
-}`
-          }
-        ]
-      }
-    ]
+}`,
+          },
+        ],
+      },
+    ],
   },
   {
     id: "c",
@@ -844,7 +845,7 @@ int main() {
     printf("Name: %s\\n", name);
 
     return 0;
-}`
+}`,
           },
           {
             title: "Arrays and Strings",
@@ -871,9 +872,9 @@ int main() {
     printf("Length: %lu\\n", strlen(result));
 
     return 0;
-}`
-          }
-        ]
+}`,
+          },
+        ],
       },
       {
         name: "Functions & Pointers",
@@ -915,11 +916,11 @@ void swap(int *a, int *b) {
 int factorial(int n) {
     if (n <= 1) return 1;
     return n * factorial(n - 1);
-}`
-          }
-        ]
-      }
-    ]
+}`,
+          },
+        ],
+      },
+    ],
   },
   {
     id: "cpp",
@@ -969,11 +970,11 @@ int main() {
     std::cout << "New age: " << person.getAge() << std::endl;
 
     return 0;
-}`
-          }
-        ]
-      }
-    ]
+}`,
+          },
+        ],
+      },
+    ],
   },
   {
     id: "csharp",
@@ -1019,11 +1020,11 @@ class Program
         var person = new Person("Alice", 30, "alice@example.com");
         person.Introduce();
     }
-}`
-          }
-        ]
-      }
-    ]
+}`,
+          },
+        ],
+      },
+    ],
   },
   {
     id: "java",
@@ -1064,11 +1065,11 @@ class Program
         Person person = new Person("Alice", 25, "alice@example.com");
         person.introduce();
     }
-}`
-          }
-        ]
-      }
-    ]
+}`,
+          },
+        ],
+      },
+    ],
   },
   {
     id: "nextjs",
@@ -1113,7 +1114,7 @@ export default function HomePage() {
       <p>This is the home page using App Router.</p>
     </div>
   )
-}`
+}`,
           },
           {
             title: "API Routes",
@@ -1148,11 +1149,11 @@ export async function POST(request: NextRequest) {
   users.push(newUser)
 
   return NextResponse.json(newUser, { status: 201 })
-}`
-          }
-        ]
-      }
-    ]
+}`,
+          },
+        ],
+      },
+    ],
   },
   {
     id: "html",
@@ -1194,7 +1195,7 @@ export async function POST(request: NextRequest) {
         <p>&copy; 2024 My Website. All rights reserved.</p>
     </footer>
 </body>
-</html>`
+</html>`,
           },
           {
             title: "HTML Forms",
@@ -1225,29 +1226,34 @@ export async function POST(request: NextRequest) {
 
         <button type="submit">Send Message</button>
     </fieldset>
-</form>`
-          }
-        ]
-      }
-    ]
-  }
+</form>`,
+          },
+        ],
+      },
+    ],
+  },
 ];
 
-export const getLanguageById = (id: string): ProgrammingLanguage | undefined => {
-  return programmingLanguages.find(lang => lang.id === id);
+export const getLanguageById = (
+  id: string,
+): ProgrammingLanguage | undefined => {
+  return programmingLanguages.find((lang) => lang.id === id);
 };
 
 export const searchLanguages = (query: string): ProgrammingLanguage[] => {
   const lowercaseQuery = query.toLowerCase();
-  return programmingLanguages.filter(lang => 
-    lang.name.toLowerCase().includes(lowercaseQuery) ||
-    lang.description.toLowerCase().includes(lowercaseQuery) ||
-    lang.categories.some(category => 
-      category.name.toLowerCase().includes(lowercaseQuery) ||
-      category.examples.some(example => 
-        example.title.toLowerCase().includes(lowercaseQuery) ||
-        example.description.toLowerCase().includes(lowercaseQuery)
-      )
-    )
+  return programmingLanguages.filter(
+    (lang) =>
+      lang.name.toLowerCase().includes(lowercaseQuery) ||
+      lang.description.toLowerCase().includes(lowercaseQuery) ||
+      lang.categories.some(
+        (category) =>
+          category.name.toLowerCase().includes(lowercaseQuery) ||
+          category.examples.some(
+            (example) =>
+              example.title.toLowerCase().includes(lowercaseQuery) ||
+              example.description.toLowerCase().includes(lowercaseQuery),
+          ),
+      ),
   );
 };

@@ -29,7 +29,7 @@ export default function Navigation() {
     { name: "About", href: "#about", type: "scroll" },
   ];
 
-  const handleNavigation = (item: typeof navItems[0]) => {
+  const handleNavigation = (item: (typeof navItems)[0]) => {
     if (item.type === "route") {
       navigate(item.href);
       setIsOpen(false);
@@ -63,7 +63,7 @@ export default function Navigation() {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
           ? "bg-background/80 backdrop-blur-md border-b"
-          : "bg-transparent"
+          : "bg-transparent",
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -88,14 +88,15 @@ export default function Navigation() {
           >
             <div className="flex items-center space-x-8">
               {navItems.map((item, index) => {
-                const isActive = item.type === "route" && location.pathname === item.href;
+                const isActive =
+                  item.type === "route" && location.pathname === item.href;
                 return (
                   <motion.button
                     key={item.name}
                     onClick={() => handleNavigation(item)}
                     className={cn(
                       "text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium relative",
-                      isActive && "text-primary"
+                      isActive && "text-primary",
                     )}
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -132,7 +133,11 @@ export default function Navigation() {
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </Button>
           </div>
         </div>
@@ -149,14 +154,15 @@ export default function Navigation() {
             >
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navItems.map((item, index) => {
-                  const isActive = item.type === "route" && location.pathname === item.href;
+                  const isActive =
+                    item.type === "route" && location.pathname === item.href;
                   return (
                     <motion.button
                       key={item.name}
                       onClick={() => handleNavigation(item)}
                       className={cn(
                         "block w-full text-left px-3 py-2 text-base font-medium text-foreground/80 hover:text-foreground hover:bg-accent rounded-md transition-colors duration-200",
-                        isActive && "bg-accent text-primary"
+                        isActive && "bg-accent text-primary",
                       )}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}

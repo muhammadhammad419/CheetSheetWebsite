@@ -1,12 +1,31 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navigation from "@/components/Navigation";
 import SyntaxHighlighter from "@/components/SyntaxHighlighter";
@@ -16,7 +35,11 @@ import {
   StaggeredItem,
   HoverScale,
 } from "@/components/Animated";
-import { programmingLanguages, type ProgrammingLanguage, type CodeExample } from "@/data/languages";
+import {
+  programmingLanguages,
+  type ProgrammingLanguage,
+  type CodeExample,
+} from "@/data/languages";
 import {
   Search,
   Code2,
@@ -34,7 +57,9 @@ export default function Examples() {
   const [selectedLanguage, setSelectedLanguage] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [isAddingExample, setIsAddingExample] = useState(false);
-  const [editingExample, setEditingExample] = useState<CodeExample | null>(null);
+  const [editingExample, setEditingExample] = useState<CodeExample | null>(
+    null,
+  );
 
   const [newExample, setNewExample] = useState({
     title: "",
@@ -43,13 +68,15 @@ export default function Examples() {
   });
 
   const filteredExamples = useMemo(() => {
-    let allExamples: Array<CodeExample & { language: string; category: string }> = [];
+    let allExamples: Array<
+      CodeExample & { language: string; category: string }
+    > = [];
 
-    programmingLanguages.forEach(lang => {
+    programmingLanguages.forEach((lang) => {
       if (selectedLanguage === "all" || lang.id === selectedLanguage) {
-        lang.categories.forEach(cat => {
+        lang.categories.forEach((cat) => {
           if (selectedCategory === "all" || cat.name === selectedCategory) {
-            cat.examples.forEach(example => {
+            cat.examples.forEach((example) => {
               allExamples.push({
                 ...example,
                 language: lang.name,
@@ -63,12 +90,13 @@ export default function Examples() {
 
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      allExamples = allExamples.filter(example =>
-        example.title.toLowerCase().includes(query) ||
-        example.description.toLowerCase().includes(query) ||
-        example.code.toLowerCase().includes(query) ||
-        example.language.toLowerCase().includes(query) ||
-        example.category.toLowerCase().includes(query)
+      allExamples = allExamples.filter(
+        (example) =>
+          example.title.toLowerCase().includes(query) ||
+          example.description.toLowerCase().includes(query) ||
+          example.code.toLowerCase().includes(query) ||
+          example.language.toLowerCase().includes(query) ||
+          example.category.toLowerCase().includes(query),
       );
     }
 
@@ -77,8 +105,8 @@ export default function Examples() {
 
   const allCategories = useMemo(() => {
     const categories = new Set<string>();
-    programmingLanguages.forEach(lang => {
-      lang.categories.forEach(cat => categories.add(cat.name));
+    programmingLanguages.forEach((lang) => {
+      lang.categories.forEach((cat) => categories.add(cat.name));
     });
     return Array.from(categories);
   }, []);
@@ -108,7 +136,7 @@ export default function Examples() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <div className="text-center space-y-4">
-              <motion.h1 
+              <motion.h1
                 className="text-3xl md:text-5xl font-bold"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -119,13 +147,14 @@ export default function Examples() {
                   Management
                 </span>
               </motion.h1>
-              <motion.p 
+              <motion.p
                 className="text-xl text-muted-foreground max-w-3xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                Browse, edit, and manage all programming language examples and code snippets
+                Browse, edit, and manage all programming language examples and
+                code snippets
               </motion.p>
             </div>
           </AnimatedSection>
@@ -155,14 +184,17 @@ export default function Examples() {
                       className="pl-10"
                     />
                   </div>
-                  
-                  <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+
+                  <Select
+                    value={selectedLanguage}
+                    onValueChange={setSelectedLanguage}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="All Languages" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">All Languages</SelectItem>
-                      {programmingLanguages.map(lang => (
+                      {programmingLanguages.map((lang) => (
                         <SelectItem key={lang.id} value={lang.id}>
                           {lang.icon} {lang.name}
                         </SelectItem>
@@ -170,13 +202,16 @@ export default function Examples() {
                     </SelectContent>
                   </Select>
 
-                  <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <Select
+                    value={selectedCategory}
+                    onValueChange={setSelectedCategory}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="All Categories" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">All Categories</SelectItem>
-                      {allCategories.map(category => (
+                      {allCategories.map((category) => (
                         <SelectItem key={category} value={category}>
                           {category}
                         </SelectItem>
@@ -184,7 +219,10 @@ export default function Examples() {
                     </SelectContent>
                   </Select>
 
-                  <Dialog open={isAddingExample} onOpenChange={setIsAddingExample}>
+                  <Dialog
+                    open={isAddingExample}
+                    onOpenChange={setIsAddingExample}
+                  >
                     <DialogTrigger asChild>
                       <Button className="w-full">
                         <Plus className="mr-2 h-4 w-4" />
@@ -195,7 +233,8 @@ export default function Examples() {
                       <DialogHeader>
                         <DialogTitle>Add New Code Example</DialogTitle>
                         <DialogDescription>
-                          Create a new code example for the selected language and category.
+                          Create a new code example for the selected language
+                          and category.
                         </DialogDescription>
                       </DialogHeader>
                       <div className="space-y-4">
@@ -203,15 +242,27 @@ export default function Examples() {
                           <label className="text-sm font-medium">Title</label>
                           <Input
                             value={newExample.title}
-                            onChange={(e) => setNewExample({...newExample, title: e.target.value})}
+                            onChange={(e) =>
+                              setNewExample({
+                                ...newExample,
+                                title: e.target.value,
+                              })
+                            }
                             placeholder="Example title..."
                           />
                         </div>
                         <div>
-                          <label className="text-sm font-medium">Description</label>
+                          <label className="text-sm font-medium">
+                            Description
+                          </label>
                           <Textarea
                             value={newExample.description}
-                            onChange={(e) => setNewExample({...newExample, description: e.target.value})}
+                            onChange={(e) =>
+                              setNewExample({
+                                ...newExample,
+                                description: e.target.value,
+                              })
+                            }
                             placeholder="Example description..."
                             rows={3}
                           />
@@ -220,14 +271,22 @@ export default function Examples() {
                           <label className="text-sm font-medium">Code</label>
                           <Textarea
                             value={newExample.code}
-                            onChange={(e) => setNewExample({...newExample, code: e.target.value})}
+                            onChange={(e) =>
+                              setNewExample({
+                                ...newExample,
+                                code: e.target.value,
+                              })
+                            }
                             placeholder="Paste your code here..."
                             rows={10}
                             className="font-mono"
                           />
                         </div>
                         <div className="flex justify-end gap-2">
-                          <Button variant="outline" onClick={() => setIsAddingExample(false)}>
+                          <Button
+                            variant="outline"
+                            onClick={() => setIsAddingExample(false)}
+                          >
                             Cancel
                           </Button>
                           <Button onClick={handleAddExample}>
@@ -265,7 +324,9 @@ export default function Examples() {
             <AnimatedSection>
               <div className="text-center py-12">
                 <Code2 className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">No examples found</h3>
+                <h3 className="text-xl font-semibold mb-2">
+                  No examples found
+                </h3>
                 <p className="text-muted-foreground mb-4">
                   Try adjusting your search criteria or add a new example
                 </p>
@@ -278,7 +339,9 @@ export default function Examples() {
           ) : (
             <StaggeredContainer className="grid lg:grid-cols-2 gap-6">
               {filteredExamples.map((example, index) => (
-                <StaggeredItem key={`${example.language}-${example.category}-${index}`}>
+                <StaggeredItem
+                  key={`${example.language}-${example.category}-${index}`}
+                >
                   <HoverScale>
                     <Card className="h-full">
                       <CardHeader>
@@ -288,10 +351,16 @@ export default function Examples() {
                               <Zap className="h-5 w-5 text-primary" />
                               {example.title}
                             </CardTitle>
-                            <CardDescription>{example.description}</CardDescription>
+                            <CardDescription>
+                              {example.description}
+                            </CardDescription>
                             <div className="flex gap-2">
-                              <Badge variant="outline">{example.language}</Badge>
-                              <Badge variant="secondary">{example.category}</Badge>
+                              <Badge variant="outline">
+                                {example.language}
+                              </Badge>
+                              <Badge variant="secondary">
+                                {example.category}
+                              </Badge>
                             </div>
                           </div>
                           <div className="flex gap-1">
@@ -315,7 +384,11 @@ export default function Examples() {
                       <CardContent>
                         <SyntaxHighlighter
                           code={example.code}
-                          language={selectedLanguage !== "all" ? selectedLanguage : "javascript"}
+                          language={
+                            selectedLanguage !== "all"
+                              ? selectedLanguage
+                              : "javascript"
+                          }
                           title={example.title}
                         />
                       </CardContent>

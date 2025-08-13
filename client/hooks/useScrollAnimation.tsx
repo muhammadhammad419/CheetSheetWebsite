@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 export const useScrollAnimation = (threshold = 0.1) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,7 +11,7 @@ export const useScrollAnimation = (threshold = 0.1) => {
           setIsVisible(true);
         }
       },
-      { threshold }
+      { threshold },
     );
 
     if (ref.current) {
@@ -29,7 +29,7 @@ export const useScrollAnimation = (threshold = 0.1) => {
 };
 
 export const useTypingAnimation = (text: string, speed = 100) => {
-  const [displayText, setDisplayText] = useState('');
+  const [displayText, setDisplayText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export const useCountAnimation = (end: number, duration = 2000, start = 0) => {
 
   const startAnimation = () => {
     if (isAnimating) return;
-    
+
     setIsAnimating(true);
     const startTime = Date.now();
     const startValue = start;
@@ -68,7 +68,9 @@ export const useCountAnimation = (end: number, duration = 2000, start = 0) => {
       const progress = Math.min(elapsed / duration, 1);
 
       const easeOutCubic = 1 - Math.pow(1 - progress, 3);
-      const currentCount = Math.floor(startValue + (endValue - startValue) * easeOutCubic);
+      const currentCount = Math.floor(
+        startValue + (endValue - startValue) * easeOutCubic,
+      );
 
       setCount(currentCount);
 

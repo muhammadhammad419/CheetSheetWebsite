@@ -54,36 +54,36 @@ You can return the answer in any order.`,
       "2 <= nums.length <= 10^4",
       "-10^9 <= nums[i] <= 10^9",
       "-10^9 <= target <= 10^9",
-      "Only one valid answer exists."
+      "Only one valid answer exists.",
     ],
     examples: [
       {
         input: "nums = [2,7,11,15], target = 9",
         expectedOutput: "[0,1]",
-        explanation: "Because nums[0] + nums[1] == 9, we return [0, 1]."
+        explanation: "Because nums[0] + nums[1] == 9, we return [0, 1].",
       },
       {
         input: "nums = [3,2,4], target = 6",
-        expectedOutput: "[1,2]"
+        expectedOutput: "[1,2]",
       },
       {
         input: "nums = [3,3], target = 6",
-        expectedOutput: "[0,1]"
-      }
+        expectedOutput: "[0,1]",
+      },
     ],
     testCases: [
       {
         input: "[2,7,11,15], 9",
-        expectedOutput: "[0,1]"
+        expectedOutput: "[0,1]",
       },
       {
         input: "[3,2,4], 6",
-        expectedOutput: "[1,2]"
+        expectedOutput: "[1,2]",
       },
       {
         input: "[3,3], 6",
-        expectedOutput: "[0,1]"
-      }
+        expectedOutput: "[0,1]",
+      },
     ],
     solutions: [
       {
@@ -105,7 +105,8 @@ You can return the answer in any order.`,
 }`,
         timeComplexity: "O(n)",
         spaceComplexity: "O(n)",
-        explanation: "Use a hash map to store numbers and their indices. For each number, check if its complement exists in the map."
+        explanation:
+          "Use a hash map to store numbers and their indices. For each number, check if its complement exists in the map.",
       },
       {
         language: "python",
@@ -123,16 +124,17 @@ You can return the answer in any order.`,
     return []`,
         timeComplexity: "O(n)",
         spaceComplexity: "O(n)",
-        explanation: "Same approach using Python dictionary for O(1) lookup time."
-      }
+        explanation:
+          "Same approach using Python dictionary for O(1) lookup time.",
+      },
     ],
     hints: [
       "A really brute force way would be to search for all possible pairs of numbers but that would be too slow.",
       "Can you use additional space to reduce time complexity?",
-      "What if you could check if the complement exists in O(1) time?"
+      "What if you could check if the complement exists in O(1) time?",
     ],
     companies: ["Amazon", "Google", "Microsoft", "Facebook", "Apple"],
-    frequency: 95
+    frequency: 95,
   },
   {
     id: "reverse-linked-list",
@@ -143,35 +145,35 @@ You can return the answer in any order.`,
     tags: ["Linked List", "Recursion"],
     constraints: [
       "The number of nodes in the list is the range [0, 5000].",
-      "-5000 <= Node.val <= 5000"
+      "-5000 <= Node.val <= 5000",
     ],
     examples: [
       {
         input: "head = [1,2,3,4,5]",
-        expectedOutput: "[5,4,3,2,1]"
+        expectedOutput: "[5,4,3,2,1]",
       },
       {
         input: "head = [1,2]",
-        expectedOutput: "[2,1]"
+        expectedOutput: "[2,1]",
       },
       {
         input: "head = []",
-        expectedOutput: "[]"
-      }
+        expectedOutput: "[]",
+      },
     ],
     testCases: [
       {
         input: "[1,2,3,4,5]",
-        expectedOutput: "[5,4,3,2,1]"
+        expectedOutput: "[5,4,3,2,1]",
       },
       {
         input: "[1,2]",
-        expectedOutput: "[2,1]"
+        expectedOutput: "[2,1]",
       },
       {
         input: "[]",
-        expectedOutput: "[]"
-      }
+        expectedOutput: "[]",
+      },
     ],
     solutions: [
       {
@@ -191,7 +193,7 @@ You can return the answer in any order.`,
 }`,
         timeComplexity: "O(n)",
         spaceComplexity: "O(1)",
-        explanation: "Iteratively reverse the pointers of each node."
+        explanation: "Iteratively reverse the pointers of each node.",
       },
       {
         language: "python",
@@ -208,16 +210,16 @@ You can return the answer in any order.`,
     return prev`,
         timeComplexity: "O(n)",
         spaceComplexity: "O(1)",
-        explanation: "Same iterative approach in Python."
-      }
+        explanation: "Same iterative approach in Python.",
+      },
     ],
     hints: [
       "Think about what happens when you reverse the direction of pointers.",
       "You need to keep track of the previous node to avoid losing the list.",
-      "Can you solve this both iteratively and recursively?"
+      "Can you solve this both iteratively and recursively?",
     ],
     companies: ["Amazon", "Microsoft", "Facebook", "Google"],
-    frequency: 88
+    frequency: 88,
   },
   {
     id: "valid-parentheses",
@@ -233,39 +235,39 @@ An input string is valid if:
     tags: ["String", "Stack"],
     constraints: [
       "1 <= s.length <= 10^4",
-      "s consists of parentheses only '()[]{}'."
+      "s consists of parentheses only '()[]{}'.",
     ],
     examples: [
       {
         input: 's = "()"',
-        expectedOutput: "true"
+        expectedOutput: "true",
       },
       {
         input: 's = "()[]{}"',
-        expectedOutput: "true"
+        expectedOutput: "true",
       },
       {
         input: 's = "(]"',
-        expectedOutput: "false"
-      }
+        expectedOutput: "false",
+      },
     ],
     testCases: [
       {
         input: '"()"',
-        expectedOutput: "true"
+        expectedOutput: "true",
       },
       {
         input: '"()[]{}"',
-        expectedOutput: "true"
+        expectedOutput: "true",
       },
       {
         input: '"(]"',
-        expectedOutput: "false"
+        expectedOutput: "false",
       },
       {
         input: '"([)]"',
-        expectedOutput: "false"
-      }
+        expectedOutput: "false",
+      },
     ],
     solutions: [
       {
@@ -293,7 +295,8 @@ An input string is valid if:
 }`,
         timeComplexity: "O(n)",
         spaceComplexity: "O(n)",
-        explanation: "Use a stack to keep track of opening brackets and match them with closing brackets."
+        explanation:
+          "Use a stack to keep track of opening brackets and match them with closing brackets.",
       },
       {
         language: "python",
@@ -312,16 +315,16 @@ An input string is valid if:
     return not stack`,
         timeComplexity: "O(n)",
         spaceComplexity: "O(n)",
-        explanation: "Same stack-based approach in Python."
-      }
+        explanation: "Same stack-based approach in Python.",
+      },
     ],
     hints: [
       "Use a stack data structure.",
       "Process the string character by character.",
-      "What should you do when you encounter an opening bracket vs a closing bracket?"
+      "What should you do when you encounter an opening bracket vs a closing bracket?",
     ],
     companies: ["Amazon", "Microsoft", "Google", "Facebook"],
-    frequency: 92
+    frequency: 92,
   },
   {
     id: "merge-two-sorted-lists",
@@ -337,35 +340,35 @@ Return the head of the merged linked list.`,
     constraints: [
       "The number of nodes in both lists is in the range [0, 50].",
       "-100 <= Node.val <= 100",
-      "Both list1 and list2 are sorted in non-decreasing order."
+      "Both list1 and list2 are sorted in non-decreasing order.",
     ],
     examples: [
       {
         input: "list1 = [1,2,4], list2 = [1,3,4]",
-        expectedOutput: "[1,1,2,3,4,4]"
+        expectedOutput: "[1,1,2,3,4,4]",
       },
       {
         input: "list1 = [], list2 = []",
-        expectedOutput: "[]"
+        expectedOutput: "[]",
       },
       {
         input: "list1 = [], list2 = [0]",
-        expectedOutput: "[0]"
-      }
+        expectedOutput: "[0]",
+      },
     ],
     testCases: [
       {
         input: "[1,2,4], [1,3,4]",
-        expectedOutput: "[1,1,2,3,4,4]"
+        expectedOutput: "[1,1,2,3,4,4]",
       },
       {
         input: "[], []",
-        expectedOutput: "[]"
+        expectedOutput: "[]",
       },
       {
         input: "[], [0]",
-        expectedOutput: "[0]"
-      }
+        expectedOutput: "[0]",
+      },
     ],
     solutions: [
       {
@@ -392,7 +395,7 @@ Return the head of the merged linked list.`,
 }`,
         timeComplexity: "O(n + m)",
         spaceComplexity: "O(1)",
-        explanation: "Use two pointers to merge the lists by comparing values."
+        explanation: "Use two pointers to merge the lists by comparing values.",
       },
       {
         language: "python",
@@ -415,16 +418,16 @@ Return the head of the merged linked list.`,
     return dummy.next`,
         timeComplexity: "O(n + m)",
         spaceComplexity: "O(1)",
-        explanation: "Same approach using Python."
-      }
+        explanation: "Same approach using Python.",
+      },
     ],
     hints: [
       "Use a dummy node to simplify the logic.",
       "Compare the values of the current nodes from both lists.",
-      "Don't forget to handle the remaining nodes after one list is exhausted."
+      "Don't forget to handle the remaining nodes after one list is exhausted.",
     ],
     companies: ["Amazon", "Microsoft", "Google"],
-    frequency: 85
+    frequency: 85,
   },
   {
     id: "maximum-subarray",
@@ -435,38 +438,35 @@ A subarray is a contiguous part of an array.`,
     difficulty: "Medium",
     category: "Dynamic Programming",
     tags: ["Array", "Dynamic Programming", "Divide and Conquer"],
-    constraints: [
-      "1 <= nums.length <= 10^5",
-      "-10^4 <= nums[i] <= 10^4"
-    ],
+    constraints: ["1 <= nums.length <= 10^5", "-10^4 <= nums[i] <= 10^4"],
     examples: [
       {
         input: "nums = [-2,1,-3,4,-1,2,1,-5,4]",
         expectedOutput: "6",
-        explanation: "[4,-1,2,1] has the largest sum = 6."
+        explanation: "[4,-1,2,1] has the largest sum = 6.",
       },
       {
         input: "nums = [1]",
-        expectedOutput: "1"
+        expectedOutput: "1",
       },
       {
         input: "nums = [5,4,-1,7,8]",
-        expectedOutput: "23"
-      }
+        expectedOutput: "23",
+      },
     ],
     testCases: [
       {
         input: "[-2,1,-3,4,-1,2,1,-5,4]",
-        expectedOutput: "6"
+        expectedOutput: "6",
       },
       {
         input: "[1]",
-        expectedOutput: "1"
+        expectedOutput: "1",
       },
       {
         input: "[5,4,-1,7,8]",
-        expectedOutput: "23"
-      }
+        expectedOutput: "23",
+      },
     ],
     solutions: [
       {
@@ -484,7 +484,8 @@ A subarray is a contiguous part of an array.`,
 }`,
         timeComplexity: "O(n)",
         spaceComplexity: "O(1)",
-        explanation: "Kadane's algorithm: at each position, decide whether to start a new subarray or extend the existing one."
+        explanation:
+          "Kadane's algorithm: at each position, decide whether to start a new subarray or extend the existing one.",
       },
       {
         language: "python",
@@ -499,17 +500,17 @@ A subarray is a contiguous part of an array.`,
     return max_so_far`,
         timeComplexity: "O(n)",
         spaceComplexity: "O(1)",
-        explanation: "Kadane's algorithm implementation in Python."
-      }
+        explanation: "Kadane's algorithm implementation in Python.",
+      },
     ],
     hints: [
       "Try using dynamic programming.",
       "At each position, you can either start a new subarray or extend the previous one.",
-      "This is a classic application of Kadane's algorithm."
+      "This is a classic application of Kadane's algorithm.",
     ],
     companies: ["Amazon", "Microsoft", "Google", "Facebook", "Apple"],
-    frequency: 90
-  }
+    frequency: 90,
+  },
 ];
 
 export const problemCategories: ProblemCategory[] = [
@@ -518,43 +519,43 @@ export const problemCategories: ProblemCategory[] = [
     name: "Array",
     description: "Problems involving array manipulation and algorithms",
     icon: "📊",
-    problems: dsaProblems.filter(p => p.category === "Array")
+    problems: dsaProblems.filter((p) => p.category === "Array"),
   },
   {
     id: "linked-list",
     name: "Linked List",
     description: "Problems involving linked list operations",
     icon: "🔗",
-    problems: dsaProblems.filter(p => p.category === "Linked List")
+    problems: dsaProblems.filter((p) => p.category === "Linked List"),
   },
   {
     id: "stack",
     name: "Stack",
     description: "Problems using stack data structure",
     icon: "📚",
-    problems: dsaProblems.filter(p => p.category === "Stack")
+    problems: dsaProblems.filter((p) => p.category === "Stack"),
   },
   {
     id: "dynamic-programming",
     name: "Dynamic Programming",
     description: "Problems solved using dynamic programming techniques",
     icon: "🧮",
-    problems: dsaProblems.filter(p => p.category === "Dynamic Programming")
+    problems: dsaProblems.filter((p) => p.category === "Dynamic Programming"),
   },
   {
     id: "tree",
     name: "Tree",
     description: "Problems involving tree data structures",
     icon: "🌳",
-    problems: dsaProblems.filter(p => p.category === "Tree")
+    problems: dsaProblems.filter((p) => p.category === "Tree"),
   },
   {
     id: "graph",
     name: "Graph",
     description: "Problems involving graph algorithms",
     icon: "🕸️",
-    problems: dsaProblems.filter(p => p.category === "Graph")
-  }
+    problems: dsaProblems.filter((p) => p.category === "Graph"),
+  },
 ];
 
 export const getDifficultyColor = (difficulty: Difficulty): string => {
@@ -571,23 +572,26 @@ export const getDifficultyColor = (difficulty: Difficulty): string => {
 };
 
 export const getProblemById = (id: string): DSAProblem | undefined => {
-  return dsaProblems.find(problem => problem.id === id);
+  return dsaProblems.find((problem) => problem.id === id);
 };
 
 export const getProblemsByCategory = (category: string): DSAProblem[] => {
-  return dsaProblems.filter(problem => problem.category === category);
+  return dsaProblems.filter((problem) => problem.category === category);
 };
 
-export const getProblemsByDifficulty = (difficulty: Difficulty): DSAProblem[] => {
-  return dsaProblems.filter(problem => problem.difficulty === difficulty);
+export const getProblemsByDifficulty = (
+  difficulty: Difficulty,
+): DSAProblem[] => {
+  return dsaProblems.filter((problem) => problem.difficulty === difficulty);
 };
 
 export const searchProblems = (query: string): DSAProblem[] => {
   const lowercaseQuery = query.toLowerCase();
-  return dsaProblems.filter(problem => 
-    problem.title.toLowerCase().includes(lowercaseQuery) ||
-    problem.description.toLowerCase().includes(lowercaseQuery) ||
-    problem.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery)) ||
-    problem.category.toLowerCase().includes(lowercaseQuery)
+  return dsaProblems.filter(
+    (problem) =>
+      problem.title.toLowerCase().includes(lowercaseQuery) ||
+      problem.description.toLowerCase().includes(lowercaseQuery) ||
+      problem.tags.some((tag) => tag.toLowerCase().includes(lowercaseQuery)) ||
+      problem.category.toLowerCase().includes(lowercaseQuery),
   );
 };

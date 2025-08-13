@@ -1,12 +1,31 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import Navigation from "@/components/Navigation";
@@ -17,13 +36,13 @@ import {
   StaggeredItem,
   HoverScale,
 } from "@/components/Animated";
-import { 
-  dsaProblems, 
-  problemCategories, 
-  getDifficultyColor, 
+import {
+  dsaProblems,
+  problemCategories,
+  getDifficultyColor,
   searchProblems,
-  type DSAProblem, 
-  type Difficulty 
+  type DSAProblem,
+  type Difficulty,
 } from "@/data/dsaProblems";
 import {
   Search,
@@ -46,18 +65,20 @@ export default function Problems() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("all");
-  const [selectedProblem, setSelectedProblem] = useState<DSAProblem | null>(null);
+  const [selectedProblem, setSelectedProblem] = useState<DSAProblem | null>(
+    null,
+  );
   const [isAddingProblem, setIsAddingProblem] = useState(false);
 
   const filteredProblems = useMemo(() => {
     let problems = dsaProblems;
 
     if (selectedCategory !== "all") {
-      problems = problems.filter(p => p.category === selectedCategory);
+      problems = problems.filter((p) => p.category === selectedCategory);
     }
 
     if (selectedDifficulty !== "all") {
-      problems = problems.filter(p => p.difficulty === selectedDifficulty);
+      problems = problems.filter((p) => p.difficulty === selectedDifficulty);
     }
 
     if (searchQuery) {
@@ -69,7 +90,7 @@ export default function Problems() {
 
   const difficultyStats = useMemo(() => {
     const stats = { Easy: 0, Medium: 0, Hard: 0 };
-    filteredProblems.forEach(p => stats[p.difficulty]++);
+    filteredProblems.forEach((p) => stats[p.difficulty]++);
     return stats;
   }, [filteredProblems]);
 
@@ -86,7 +107,7 @@ export default function Problems() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <div className="text-center space-y-4">
-              <motion.h1 
+              <motion.h1
                 className="text-3xl md:text-5xl font-bold"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -97,13 +118,14 @@ export default function Problems() {
                   & Solutions
                 </span>
               </motion.h1>
-              <motion.p 
+              <motion.p
                 className="text-xl text-muted-foreground max-w-3xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                Practice data structures and algorithms with curated problems and detailed solutions
+                Practice data structures and algorithms with curated problems
+                and detailed solutions
               </motion.p>
             </div>
           </AnimatedSection>
@@ -136,13 +158,16 @@ export default function Problems() {
                       />
                     </div>
 
-                    <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                    <Select
+                      value={selectedCategory}
+                      onValueChange={setSelectedCategory}
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="All Categories" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="all">All Categories</SelectItem>
-                        {problemCategories.map(category => (
+                        {problemCategories.map((category) => (
                           <SelectItem key={category.id} value={category.name}>
                             {category.icon} {category.name}
                           </SelectItem>
@@ -150,7 +175,10 @@ export default function Problems() {
                       </SelectContent>
                     </Select>
 
-                    <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
+                    <Select
+                      value={selectedDifficulty}
+                      onValueChange={setSelectedDifficulty}
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="All Difficulties" />
                       </SelectTrigger>
@@ -162,7 +190,10 @@ export default function Problems() {
                       </SelectContent>
                     </Select>
 
-                    <Button className="w-full" onClick={() => setIsAddingProblem(true)}>
+                    <Button
+                      className="w-full"
+                      onClick={() => setIsAddingProblem(true)}
+                    >
                       <Plus className="mr-2 h-4 w-4" />
                       Add Problem
                     </Button>
@@ -181,20 +212,30 @@ export default function Problems() {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Total Problems</span>
-                      <Badge variant="secondary">{filteredProblems.length}</Badge>
+                      <span className="text-sm text-muted-foreground">
+                        Total Problems
+                      </span>
+                      <Badge variant="secondary">
+                        {filteredProblems.length}
+                      </Badge>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-green-600">Easy</span>
-                      <Badge className="bg-green-500">{difficultyStats.Easy}</Badge>
+                      <Badge className="bg-green-500">
+                        {difficultyStats.Easy}
+                      </Badge>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-yellow-600">Medium</span>
-                      <Badge className="bg-yellow-500">{difficultyStats.Medium}</Badge>
+                      <Badge className="bg-yellow-500">
+                        {difficultyStats.Medium}
+                      </Badge>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-red-600">Hard</span>
-                      <Badge className="bg-red-500">{difficultyStats.Hard}</Badge>
+                      <Badge className="bg-red-500">
+                        {difficultyStats.Hard}
+                      </Badge>
                     </div>
                   </CardContent>
                 </Card>
@@ -210,10 +251,14 @@ export default function Problems() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2">
-                    {problemCategories.map(category => (
+                    {problemCategories.map((category) => (
                       <Button
                         key={category.id}
-                        variant={selectedCategory === category.name ? "default" : "ghost"}
+                        variant={
+                          selectedCategory === category.name
+                            ? "default"
+                            : "ghost"
+                        }
                         className="w-full justify-start"
                         onClick={() => setSelectedCategory(category.name)}
                       >
@@ -248,15 +293,27 @@ export default function Problems() {
                             >
                               ← Back
                             </Button>
-                            <Badge className={getDifficultyColor(selectedProblem.difficulty)}>
+                            <Badge
+                              className={getDifficultyColor(
+                                selectedProblem.difficulty,
+                              )}
+                            >
                               {selectedProblem.difficulty}
                             </Badge>
-                            <Badge variant="outline">{selectedProblem.category}</Badge>
+                            <Badge variant="outline">
+                              {selectedProblem.category}
+                            </Badge>
                           </div>
-                          <CardTitle className="text-2xl">{selectedProblem.title}</CardTitle>
+                          <CardTitle className="text-2xl">
+                            {selectedProblem.title}
+                          </CardTitle>
                           <div className="flex gap-2 flex-wrap">
-                            {selectedProblem.tags.map(tag => (
-                              <Badge key={tag} variant="secondary" className="text-xs">
+                            {selectedProblem.tags.map((tag) => (
+                              <Badge
+                                key={tag}
+                                variant="secondary"
+                                className="text-xs"
+                              >
                                 {tag}
                               </Badge>
                             ))}
@@ -290,7 +347,9 @@ export default function Problems() {
                         </CardHeader>
                         <CardContent>
                           <div className="prose max-w-none">
-                            <p className="whitespace-pre-line">{selectedProblem.description}</p>
+                            <p className="whitespace-pre-line">
+                              {selectedProblem.description}
+                            </p>
                           </div>
                         </CardContent>
                       </Card>
@@ -301,13 +360,26 @@ export default function Problems() {
                         </CardHeader>
                         <CardContent className="space-y-4">
                           {selectedProblem.examples.map((example, index) => (
-                            <div key={index} className="border rounded-lg p-4 bg-muted/50">
-                              <h4 className="font-semibold mb-2">Example {index + 1}:</h4>
+                            <div
+                              key={index}
+                              className="border rounded-lg p-4 bg-muted/50"
+                            >
+                              <h4 className="font-semibold mb-2">
+                                Example {index + 1}:
+                              </h4>
                               <div className="space-y-2 text-sm">
-                                <div><strong>Input:</strong> {example.input}</div>
-                                <div><strong>Output:</strong> {example.expectedOutput}</div>
+                                <div>
+                                  <strong>Input:</strong> {example.input}
+                                </div>
+                                <div>
+                                  <strong>Output:</strong>{" "}
+                                  {example.expectedOutput}
+                                </div>
                                 {example.explanation && (
-                                  <div><strong>Explanation:</strong> {example.explanation}</div>
+                                  <div>
+                                    <strong>Explanation:</strong>{" "}
+                                    {example.explanation}
+                                  </div>
                                 )}
                               </div>
                             </div>
@@ -322,9 +394,11 @@ export default function Problems() {
                           </CardHeader>
                           <CardContent>
                             <ul className="list-disc list-inside space-y-1 text-sm">
-                              {selectedProblem.constraints.map((constraint, index) => (
-                                <li key={index}>{constraint}</li>
-                              ))}
+                              {selectedProblem.constraints.map(
+                                (constraint, index) => (
+                                  <li key={index}>{constraint}</li>
+                                ),
+                              )}
                             </ul>
                           </CardContent>
                         </Card>
@@ -336,7 +410,9 @@ export default function Problems() {
                         <Card key={index}>
                           <CardHeader>
                             <CardTitle className="flex items-center justify-between">
-                              <span>Solution {index + 1} - {solution.language}</span>
+                              <span>
+                                Solution {index + 1} - {solution.language}
+                              </span>
                               <div className="flex gap-2 text-sm">
                                 <Badge variant="outline">
                                   <Clock className="h-3 w-3 mr-1" />
@@ -349,7 +425,9 @@ export default function Problems() {
                               </div>
                             </CardTitle>
                             {solution.explanation && (
-                              <CardDescription>{solution.explanation}</CardDescription>
+                              <CardDescription>
+                                {solution.explanation}
+                              </CardDescription>
                             )}
                           </CardHeader>
                           <CardContent>
@@ -375,9 +453,15 @@ export default function Problems() {
                           {selectedProblem.hints ? (
                             <div className="space-y-3">
                               {selectedProblem.hints.map((hint, index) => (
-                                <div key={index} className="border rounded-lg p-3 bg-muted/50">
+                                <div
+                                  key={index}
+                                  className="border rounded-lg p-3 bg-muted/50"
+                                >
                                   <div className="flex items-start gap-2">
-                                    <Badge variant="outline" className="text-xs">
+                                    <Badge
+                                      variant="outline"
+                                      className="text-xs"
+                                    >
                                       Hint {index + 1}
                                     </Badge>
                                   </div>
@@ -386,7 +470,9 @@ export default function Problems() {
                               ))}
                             </div>
                           ) : (
-                            <p className="text-muted-foreground">No hints available for this problem.</p>
+                            <p className="text-muted-foreground">
+                              No hints available for this problem.
+                            </p>
                           )}
                         </CardContent>
                       </Card>
@@ -406,20 +492,26 @@ export default function Problems() {
                         <CardContent>
                           {selectedProblem.companies ? (
                             <div className="flex flex-wrap gap-2">
-                              {selectedProblem.companies.map((company, index) => (
-                                <Badge key={index} variant="outline">
-                                  {company}
-                                </Badge>
-                              ))}
+                              {selectedProblem.companies.map(
+                                (company, index) => (
+                                  <Badge key={index} variant="outline">
+                                    {company}
+                                  </Badge>
+                                ),
+                              )}
                             </div>
                           ) : (
-                            <p className="text-muted-foreground">No company data available.</p>
+                            <p className="text-muted-foreground">
+                              No company data available.
+                            </p>
                           )}
-                          
+
                           {selectedProblem.frequency && (
                             <div className="mt-4 pt-4 border-t">
                               <div className="flex items-center gap-2">
-                                <span className="text-sm font-medium">Interview Frequency:</span>
+                                <span className="text-sm font-medium">
+                                  Interview Frequency:
+                                </span>
                                 <Badge className="bg-blue-500">
                                   {selectedProblem.frequency}%
                                 </Badge>
@@ -445,7 +537,9 @@ export default function Problems() {
                   <AnimatedSection>
                     <div className="text-center py-12">
                       <Code2 className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                      <h3 className="text-xl font-semibold mb-2">No problems found</h3>
+                      <h3 className="text-xl font-semibold mb-2">
+                        No problems found
+                      </h3>
                       <p className="text-muted-foreground mb-4">
                         Try adjusting your search criteria or add a new problem
                       </p>
@@ -460,7 +554,7 @@ export default function Problems() {
                     {filteredProblems.map((problem, index) => (
                       <StaggeredItem key={problem.id}>
                         <HoverScale>
-                          <Card 
+                          <Card
                             className="cursor-pointer transition-all duration-200 hover:shadow-lg"
                             onClick={() => handleProblemClick(problem)}
                           >
@@ -468,32 +562,51 @@ export default function Problems() {
                               <div className="flex items-start justify-between">
                                 <div className="space-y-2">
                                   <div className="flex items-center gap-2">
-                                    <Badge className={getDifficultyColor(problem.difficulty)}>
+                                    <Badge
+                                      className={getDifficultyColor(
+                                        problem.difficulty,
+                                      )}
+                                    >
                                       {problem.difficulty}
                                     </Badge>
-                                    <Badge variant="outline">{problem.category}</Badge>
-                                    {problem.frequency && problem.frequency > 80 && (
-                                      <Badge variant="secondary">🔥 Popular</Badge>
-                                    )}
+                                    <Badge variant="outline">
+                                      {problem.category}
+                                    </Badge>
+                                    {problem.frequency &&
+                                      problem.frequency > 80 && (
+                                        <Badge variant="secondary">
+                                          🔥 Popular
+                                        </Badge>
+                                      )}
                                   </div>
                                   <CardTitle className="hover:text-primary transition-colors">
                                     {problem.title}
                                   </CardTitle>
-                                  <CardDescription className="overflow-hidden" style={{
-                                    display: '-webkit-box',
-                                    WebkitLineClamp: 2,
-                                    WebkitBoxOrient: 'vertical',
-                                  }}>
+                                  <CardDescription
+                                    className="overflow-hidden"
+                                    style={{
+                                      display: "-webkit-box",
+                                      WebkitLineClamp: 2,
+                                      WebkitBoxOrient: "vertical",
+                                    }}
+                                  >
                                     {problem.description}
                                   </CardDescription>
                                   <div className="flex gap-1 flex-wrap">
-                                    {problem.tags.slice(0, 3).map(tag => (
-                                      <Badge key={tag} variant="secondary" className="text-xs">
+                                    {problem.tags.slice(0, 3).map((tag) => (
+                                      <Badge
+                                        key={tag}
+                                        variant="secondary"
+                                        className="text-xs"
+                                      >
                                         {tag}
                                       </Badge>
                                     ))}
                                     {problem.tags.length > 3 && (
-                                      <Badge variant="secondary" className="text-xs">
+                                      <Badge
+                                        variant="secondary"
+                                        className="text-xs"
+                                      >
                                         +{problem.tags.length - 3}
                                       </Badge>
                                     )}

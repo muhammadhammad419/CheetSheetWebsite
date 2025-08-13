@@ -809,6 +809,427 @@ input[type="email"] {
         ]
       }
     ]
+  },
+  {
+    id: "c",
+    name: "C",
+    icon: "🔧",
+    description: "Low-level, compiled programming language",
+    color: "bg-blue-600",
+    categories: [
+      {
+        name: "Variables & Data Types",
+        examples: [
+          {
+            title: "Variable Declaration",
+            description: "Basic data types and variable declarations",
+            code: `#include <stdio.h>
+
+int main() {
+    // Basic data types
+    int age = 25;
+    float height = 5.9f;
+    double price = 99.99;
+    char grade = 'A';
+    char name[50] = "John";
+
+    // Constants
+    const int MAX_SIZE = 100;
+
+    // Pointers
+    int *ptr = &age;
+
+    printf("Age: %d\\n", age);
+    printf("Height: %.1f\\n", height);
+    printf("Name: %s\\n", name);
+
+    return 0;
+}`
+          },
+          {
+            title: "Arrays and Strings",
+            description: "Working with arrays and strings in C",
+            code: `#include <stdio.h>
+#include <string.h>
+
+int main() {
+    // Arrays
+    int numbers[5] = {1, 2, 3, 4, 5};
+    int matrix[3][3] = {{1,2,3}, {4,5,6}, {7,8,9}};
+
+    // Strings
+    char str1[20] = "Hello";
+    char str2[] = "World";
+    char result[50];
+
+    // String operations
+    strcpy(result, str1);
+    strcat(result, " ");
+    strcat(result, str2);
+
+    printf("Result: %s\\n", result);
+    printf("Length: %lu\\n", strlen(result));
+
+    return 0;
+}`
+          }
+        ]
+      },
+      {
+        name: "Functions & Pointers",
+        examples: [
+          {
+            title: "Function Declaration",
+            description: "Creating and using functions",
+            code: `#include <stdio.h>
+
+// Function prototypes
+int add(int a, int b);
+void swap(int *a, int *b);
+int factorial(int n);
+
+int main() {
+    int x = 10, y = 20;
+
+    printf("Sum: %d\\n", add(x, y));
+
+    printf("Before swap: x=%d, y=%d\\n", x, y);
+    swap(&x, &y);
+    printf("After swap: x=%d, y=%d\\n", x, y);
+
+    printf("Factorial of 5: %d\\n", factorial(5));
+
+    return 0;
+}
+
+int add(int a, int b) {
+    return a + b;
+}
+
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}`
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "cpp",
+    name: "C++",
+    icon: "⚙️",
+    description: "Object-oriented programming language based on C",
+    color: "bg-blue-700",
+    categories: [
+      {
+        name: "Classes & Objects",
+        examples: [
+          {
+            title: "Class Definition",
+            description: "Basic class structure and object creation",
+            code: `#include <iostream>
+#include <string>
+
+class Person {
+private:
+    std::string name;
+    int age;
+
+public:
+    // Constructor
+    Person(std::string n, int a) : name(n), age(a) {}
+
+    // Getter methods
+    std::string getName() const { return name; }
+    int getAge() const { return age; }
+
+    // Setter methods
+    void setName(const std::string& n) { name = n; }
+    void setAge(int a) { age = a; }
+
+    // Method
+    void introduce() {
+        std::cout << "Hi, I'm " << name << " and I'm "
+                  << age << " years old." << std::endl;
+    }
+};
+
+int main() {
+    Person person("Alice", 25);
+    person.introduce();
+
+    person.setAge(26);
+    std::cout << "New age: " << person.getAge() << std::endl;
+
+    return 0;
+}`
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "csharp",
+    name: "C#",
+    icon: "🔷",
+    description: "Modern, object-oriented programming language by Microsoft",
+    color: "bg-purple-600",
+    categories: [
+      {
+        name: "Classes & Properties",
+        examples: [
+          {
+            title: "Class with Properties",
+            description: "Modern C# class with auto-properties and methods",
+            code: `using System;
+
+public class Person
+{
+    // Auto-properties
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Email { get; private set; }
+
+    // Constructor
+    public Person(string name, int age, string email)
+    {
+        Name = name;
+        Age = age;
+        Email = email;
+    }
+
+    // Method
+    public void Introduce()
+    {
+        Console.WriteLine($"Hi, I'm {Name}, {Age} years old.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        var person = new Person("Alice", 30, "alice@example.com");
+        person.Introduce();
+    }
+}`
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "java",
+    name: "Java",
+    icon: "☕",
+    description: "Object-oriented, platform-independent programming language",
+    color: "bg-orange-600",
+    categories: [
+      {
+        name: "Classes & Objects",
+        examples: [
+          {
+            title: "Class Definition",
+            description: "Basic Java class with constructors and methods",
+            code: `public class Person {
+    private String name;
+    private int age;
+    private String email;
+
+    // Constructor
+    public Person(String name, int age, String email) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+    }
+
+    // Getter methods
+    public String getName() { return name; }
+    public int getAge() { return age; }
+    public String getEmail() { return email; }
+
+    // Method
+    public void introduce() {
+        System.out.println("Hi, I'm " + name + " and I'm " + age + " years old.");
+    }
+
+    public static void main(String[] args) {
+        Person person = new Person("Alice", 25, "alice@example.com");
+        person.introduce();
+    }
+}`
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "nextjs",
+    name: "Next.js",
+    icon: "⚡",
+    description: "React framework for production-ready applications",
+    color: "bg-black",
+    categories: [
+      {
+        name: "Pages & Routing",
+        examples: [
+          {
+            title: "App Router Setup",
+            description: "Next.js 13+ App Router structure",
+            code: `// app/layout.tsx
+import './globals.css'
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <nav className="p-4 bg-blue-600 text-white">
+          <h1>My Next.js App</h1>
+        </nav>
+        <main className="container mx-auto p-4">
+          {children}
+        </main>
+      </body>
+    </html>
+  )
+}
+
+// app/page.tsx
+export default function HomePage() {
+  return (
+    <div>
+      <h1>Welcome to Next.js 13+</h1>
+      <p>This is the home page using App Router.</p>
+    </div>
+  )
+}`
+          },
+          {
+            title: "API Routes",
+            description: "Creating API endpoints in Next.js",
+            code: `// app/api/users/route.ts
+import { NextRequest, NextResponse } from 'next/server'
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const users: User[] = [
+  { id: 1, name: 'John Doe', email: 'john@example.com' },
+  { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
+]
+
+export async function GET() {
+  return NextResponse.json(users)
+}
+
+export async function POST(request: NextRequest) {
+  const body = await request.json()
+
+  const newUser: User = {
+    id: users.length + 1,
+    name: body.name,
+    email: body.email,
+  }
+
+  users.push(newUser)
+
+  return NextResponse.json(newUser, { status: 201 })
+}`
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "html",
+    name: "HTML",
+    icon: "🌐",
+    description: "Markup language for creating web pages",
+    color: "bg-orange-500",
+    categories: [
+      {
+        name: "Document Structure",
+        examples: [
+          {
+            title: "Basic HTML Document",
+            description: "Complete HTML5 document structure",
+            code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Page</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Welcome to My Website</h1>
+        <p>This is a sample HTML page.</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>`
+          },
+          {
+            title: "HTML Forms",
+            description: "Creating interactive forms",
+            code: `<form action="/submit" method="POST">
+    <fieldset>
+        <legend>Contact Information</legend>
+
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <div>
+            <input type="checkbox" id="newsletter" name="newsletter">
+            <label for="newsletter">Subscribe to newsletter</label>
+        </div>
+
+        <button type="submit">Send Message</button>
+    </fieldset>
+</form>`
+          }
+        ]
+      }
+    ]
   }
 ];
 

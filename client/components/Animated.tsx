@@ -126,12 +126,12 @@ export const ParticleBackground = () => {
           key={particle}
           className="absolute w-1 h-1 bg-primary/20 rounded-full"
           initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
+            x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 1920,
+            y: typeof window !== 'undefined' ? Math.random() * window.innerHeight : Math.random() * 1080,
           }}
           animate={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
+            x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 1920,
+            y: typeof window !== 'undefined' ? Math.random() * window.innerHeight : Math.random() * 1080,
           }}
           transition={{
             duration: Math.random() * 20 + 10,
